@@ -4,74 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ranking Camisas Copa 2026</title>
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#101010;color:#fff;padding:18px}
-h1{text-align:center;margin-bottom:6px}
-.subtitle{text-align:center;color:#bbb;margin-bottom:18px}
-.topbar{position:sticky;top:0;background:#101010;z-index:10;padding:12px 0;border-bottom:1px solid #333}
-.controls{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;padding:18px}
+.topbar{position:sticky;top:0;z-index:10;background:#111;border-bottom:1px solid #333;padding:12px;text-align:center}
+.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 select,button{padding:10px 14px;border-radius:10px;border:0;font-weight:bold}
-button{cursor:pointer}
-.status{text-align:center;color:#bbb;margin-top:10px;font-size:14px}
-.team{margin:36px 0}
-.team h2{font-size:26px;margin-bottom:14px;border-left:6px solid #f5c542;padding-left:10px}
-.kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{background:#1d1d1d;border:1px solid #333;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px #0006}
-.imgbox{height:310px;background:#000;display:flex;align-items:center;justify-content:center;position:relative}
+button{cursor:pointer;background:#f5c542}
+.status{font-size:13px;color:#bbb;margin-top:8px}
+.team{margin:35px 0}
+.team h2{border-left:6px solid #f5c542;padding-left:10px}
+.kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:#1d1d1d;border:1px solid #333;border-radius:18px;overflow:hidden}
+.imgbox{height:300px;background:#000;display:flex;align-items:center;justify-content:center;color:#777;text-align:center}
 .imgbox img{width:100%;height:100%;object-fit:contain;background:#fff}
-.placeholder{text-align:center;color:#888;padding:20px}
 .content{padding:16px}
-.kit-title{font-size:20px;font-weight:bold;margin-bottom:14px}
+.kit-title{font-size:20px;font-weight:bold;margin-bottom:12px}
 .question{margin:14px 0}
-.question p{margin-bottom:8px;color:#ddd}
-.stars{display:flex;gap:4px}
 .star{font-size:26px;cursor:pointer;filter:grayscale(1);opacity:.35}
 .star.active{filter:none;opacity:1}
-.tags{display:flex;gap:8px;flex-wrap:wrap}
-.tag{border:1px solid #555;padding:8px 12px;border-radius:999px;cursor:pointer;color:#ddd}
-.tag.active{background:#f5c542;color:#000;border-color:#f5c542;font-weight:bold}
+.tag{display:inline-block;border:1px solid #555;border-radius:999px;padding:8px 12px;margin:4px;cursor:pointer}
+.tag.active{background:#f5c542;color:#000;font-weight:bold}
 .rankings{margin-top:40px}
-.ranking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.ranking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
 .ranking-box{background:#1d1d1d;border:1px solid #333;border-radius:18px;padding:16px}
-.ranking-box h3{margin-bottom:12px}
-.ranking-item{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #333;padding:10px 0}
-.badges{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
-.badge{font-size:11px;background:#333;border-radius:999px;padding:3px 7px}
-.small{font-size:12px;color:#aaa;margin-top:6px}
+.ranking-item{display:flex;justify-content:space-between;border-bottom:1px solid #333;padding:9px 0;gap:8px}
+.badge{font-size:11px;background:#333;border-radius:999px;padding:3px 7px;margin-right:4px}
+.small{font-size:12px;color:#aaa}
 </style>
 </head>
-
 <body>
 
 <div class="topbar">
-  <h1>🏆 Ranking Camisas Copa 2026</h1>
-  <div class="subtitle">Álbum de figurinhas dos uniformes — Lindo vs Linda</div>
-  <div class="controls">
-    <label>Quem está votando?</label>
-    <select id="currentUser">
-      <option value="lindo">Lindo</option>
-      <option value="linda">Linda</option>
-    </select>
-    <button onclick="loadImagesFromGuide()">Atualizar imagens do guia</button>
-  </div>
-  <div class="status" id="status">Carregando...</div>
+<h1>🏆 Ranking Camisas Copa 2026</h1>
+<div>Lindo vs Linda</div>
+<div class="controls">
+<select id="currentUser">
+<option value="lindo">Lindo</option>
+<option value="linda">Linda</option>
+</select>
+<button id="saveBtn">Salvar avaliações</button>
+<button id="imageBtn">Atualizar imagens do guia</button>
+</div>
+<div id="status" class="status">Carregando...</div>
 </div>
 
 <div id="teams"></div>
 
 <section class="rankings">
-  <h2>📊 Rankings</h2>
-  <br>
-  <div class="ranking-grid">
-    <div class="ranking-box"><h3>⭐ Geral — Lindo</h3><div id="ranking-geral-lindo"></div></div>
-    <div class="ranking-box"><h3>⭐ Geral — Linda</h3><div id="ranking-geral-linda"></div></div>
-    <div class="ranking-box"><h3>🎨 Bonita — Lindo</h3><div id="ranking-bonita-lindo"></div></div>
-    <div class="ranking-box"><h3>🎨 Bonita — Linda</h3><div id="ranking-bonita-linda"></div></div>
-    <div class="ranking-box"><h3>👕 Usaria depois — Lindo</h3><div id="ranking-uso-lindo"></div></div>
-    <div class="ranking-box"><h3>👕 Usaria depois — Linda</h3><div id="ranking-uso-linda"></div></div>
-  </div>
+<h2>📊 Rankings</h2>
+<div class="ranking-grid">
+<div class="ranking-box"><h3>⭐ Geral — Lindo</h3><div id="ranking-geral-lindo"></div></div>
+<div class="ranking-box"><h3>⭐ Geral — Linda</h3><div id="ranking-geral-linda"></div></div>
+<div class="ranking-box"><h3>🎨 Bonita — Lindo</h3><div id="ranking-bonita-lindo"></div></div>
+<div class="ranking-box"><h3>🎨 Bonita — Linda</h3><div id="ranking-bonita-linda"></div></div>
+<div class="ranking-box"><h3>👕 Usaria depois — Lindo</h3><div id="ranking-uso-lindo"></div></div>
+<div class="ranking-box"><h3>👕 Usaria depois — Linda</h3><div id="ranking-uso-linda"></div></div>
+</div>
 </section>
 
 <script type="module">
@@ -79,19 +67,22 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDm-g6OTM_fDHYSv1FEqDt1ULC281EtK4U",
-  authDomain: "ranking-camisas-copa-202-3a2f2.firebaseapp.com",
-  projectId: "ranking-camisas-copa-202-3a2f2",
-  storageBucket: "ranking-camisas-copa-202-3a2f2.firebasestorage.app",
-  messagingSenderId: "909673035671",
-  appId: "1:909673035671:web:eeb3ba06a51374f6d8f6d2"
+apiKey:"AIzaSyDm-g6OTM_fDHYSv1FEqDt1ULC281EtK4U",
+authDomain:"ranking-camisas-copa-202-3a2f2.firebaseapp.com",
+projectId:"ranking-camisas-copa-202-3a2f2",
+storageBucket:"ranking-camisas-copa-202-3a2f2.firebasestorage.app",
+messagingSenderId:"909673035671",
+appId:"1:909673035671:web:eeb3ba06a51374f6d8f6d2"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const GUIDE_URL = "https://mantosdofutebol.com.br/2026/06/camisas-copa-do-mundo-2026/";
-const PROXY_URL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(GUIDE_URL);
+const GUIDE = "https://mantosdofutebol.com.br/2026/06/camisas-copa-do-mundo-2026/";
+const PROXIES = [
+"https://api.allorigins.win/raw?url=" + encodeURIComponent(GUIDE),
+"https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(GUIDE)
+];
 
 const teamNames = [
 "México","África do Sul","Coréia do Sul","República Tcheca",
@@ -108,235 +99,217 @@ const teamNames = [
 "Inglaterra","Croácia","Gana","Panamá"
 ];
 
-let teams = teamNames.map(name => ({
-  name,
-  kits:[1,2,3].map(n=>({
-    id: slug(name) + n,
-    title: `${name} ${n}`,
-    image: null
-  }))
+const teams = teamNames.map(name=>({
+name,
+kits:[1,2,3].map(n=>({id:slug(name)+n,title:`${name} ${n}`,image:null}))
 }));
 
+let votes = {};
+let dirty = {};
 const statusEl = document.getElementById("status");
 
-function slug(text){
-  return text.toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/[^a-z0-9]+/g,"-")
-    .replace(/(^-|-$)/g,"");
+function slug(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"")}
+function norm(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"")}
+
+function emptyVote(){return{beauty:0,use:0,sair:false,treino:false}}
+
+async function loadAllVotes(){
+for(const user of ["lindo","linda"]){
+for(const team of teams){
+for(const kit of team.kits){
+const id = `${user}_${kit.id}`;
+const snap = await getDoc(doc(db,"votes",id));
+votes[id] = snap.exists()?snap.data():emptyVote();
+}
+}
+}
 }
 
-async function loadImagesFromGuide(){
-  statusEl.textContent = "Buscando imagens no guia...";
-  try{
-    const html = await fetch(PROXY_URL).then(r=>r.text());
-    const docHtml = new DOMParser().parseFromString(html,"text/html");
-
-    const headings = [...docHtml.querySelectorAll("h3")];
-
-    headings.forEach(h=>{
-      const teamName = h.textContent.trim();
-      const team = teams.find(t => normalize(t.name) === normalize(teamName));
-      if(!team) return;
-
-      let images = [];
-      let node = h.nextElementSibling;
-
-      while(node && node.tagName !== "H3" && node.tagName !== "H2"){
-        node.querySelectorAll?.("img").forEach(img=>{
-          const src = img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-lazy-src");
-          if(src && src.includes("assets-mantosdofutebol") && !images.includes(src)){
-            images.push(src);
-          }
-        });
-        node = node.nextElementSibling;
-      }
-
-      images.slice(0,3).forEach((img,i)=>{
-        team.kits[i].image = img;
-      });
-    });
-
-    localStorage.setItem("teamsWithImages", JSON.stringify(teams));
-    statusEl.textContent = "Imagens atualizadas. Se alguma não aparecer, ela ficará como 'não divulgada'.";
-    render();
-    loadRankings();
-
-  }catch(e){
-    statusEl.textContent = "Não consegui puxar as imagens automaticamente. Os espaços sem imagem ficarão pretos.";
-    render();
-  }
+function getVote(user,kitId){
+const id = `${user}_${kitId}`;
+if(!votes[id]) votes[id]=emptyVote();
+return votes[id];
 }
 
-function normalize(text){
-  return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+function setDirty(user,kitId){
+dirty[`${user}_${kitId}`]=true;
+statusEl.textContent = "Você tem alterações não salvas.";
 }
 
-async function loadVote(user, kitId){
-  const snap = await getDoc(doc(db,"votes",`${user}_${kitId}`));
-  return snap.exists() ? snap.data() : { beauty:0, use:0, sair:false, treino:false };
+function render(){
+const container=document.getElementById("teams");
+const user=document.getElementById("currentUser").value;
+container.innerHTML="";
+
+teams.forEach(team=>{
+const div=document.createElement("div");
+div.className="team";
+div.innerHTML=`<h2>${team.name}</h2><div class="kits"></div>`;
+const kitsDiv=div.querySelector(".kits");
+
+team.kits.forEach(kit=>{
+const v=getVote(user,kit.id);
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<div class="imgbox">
+${kit.image?`<img src="${kit.image}" onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'">`:`Camisa ainda não divulgada`}
+</div>
+<div class="content">
+<div class="kit-title">${kit.title}</div>
+
+<div class="question">
+<p>Eu acho ela bonita?</p>
+<div>${stars(v.beauty,"beauty",kit.id)}</div>
+</div>
+
+<div class="question">
+<p>Eu usaria depois da Copa?</p>
+<div>${stars(v.use,"use",kit.id)}</div>
+</div>
+
+<div class="question">
+<p>Eu usaria para:</p>
+<span class="tag ${v.sair?"active":""}" data-kit="${kit.id}" data-type="sair">Sair</span>
+<span class="tag ${v.treino?"active":""}" data-kit="${kit.id}" data-type="treino">Jogar/Treinar</span>
+</div>
+</div>`;
+kitsDiv.appendChild(card);
+});
+container.appendChild(div);
+});
+bindActions();
+renderRankings();
 }
 
-async function saveVote(user, kitId, data){
-  await setDoc(doc(db,"votes",`${user}_${kitId}`), data);
-  loadRankings();
+function stars(value,type,kitId){
+let html="";
+for(let i=1;i<=5;i++){
+html+=`<span class="star ${i<=value?"active":""}" data-kit="${kitId}" data-type="${type}" data-value="${i}">⭐</span>`;
 }
-
-function starsHTML(value, type, kitId){
-  let html = `<div class="stars">`;
-  for(let i=1;i<=5;i++){
-    html += `<span class="star ${i<=value?'active':''}" data-type="${type}" data-kit="${kitId}" data-value="${i}">⭐</span>`;
-  }
-  html += `</div>`;
-  return html;
-}
-
-async function render(){
-  const currentUser = document.getElementById("currentUser").value;
-  const container = document.getElementById("teams");
-  container.innerHTML = "";
-
-  for(const team of teams){
-    const teamDiv = document.createElement("div");
-    teamDiv.className = "team";
-    teamDiv.innerHTML = `<h2>${team.name}</h2><div class="kits"></div>`;
-    const kitsDiv = teamDiv.querySelector(".kits");
-
-    for(const kit of team.kits){
-      const vote = await loadVote(currentUser, kit.id);
-
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <div class="imgbox">
-          ${kit.image ? `<img src="${kit.image}" onerror="this.remove();this.parentElement.innerHTML='<div class=placeholder>Camisa ainda não divulgada</div>'">` : `<div class="placeholder">Camisa ainda não divulgada</div>`}
-        </div>
-        <div class="content">
-          <div class="kit-title">${kit.title}</div>
-
-          <div class="question">
-            <p>Eu acho ela bonita?</p>
-            ${starsHTML(vote.beauty || 0, "beauty", kit.id)}
-          </div>
-
-          <div class="question">
-            <p>Eu usaria depois da Copa?</p>
-            ${starsHTML(vote.use || 0, "use", kit.id)}
-          </div>
-
-          <div class="question">
-            <p>Eu usaria para:</p>
-            <div class="tags">
-              <span class="tag ${vote.sair?'active':''}" data-type="sair" data-kit="${kit.id}">Sair</span>
-              <span class="tag ${vote.treino?'active':''}" data-type="treino" data-kit="${kit.id}">Jogar/Treinar</span>
-            </div>
-          </div>
-        </div>
-      `;
-      kitsDiv.appendChild(card);
-    }
-
-    container.appendChild(teamDiv);
-  }
-
-  bindActions();
+return html;
 }
 
 function bindActions(){
-  document.querySelectorAll(".star").forEach(star=>{
-    star.onclick = async()=>{
-      const user = document.getElementById("currentUser").value;
-      const kitId = star.dataset.kit;
-      const type = star.dataset.type;
-      const value = Number(star.dataset.value);
-      const vote = await loadVote(user, kitId);
+document.querySelectorAll(".star").forEach(el=>{
+el.onclick=()=>{
+const user=document.getElementById("currentUser").value;
+const kitId=el.dataset.kit;
+const type=el.dataset.type;
+const value=Number(el.dataset.value);
+const v=getVote(user,kitId);
+v[type]=v[type]===value?0:value;
+setDirty(user,kitId);
+render();
+};
+});
 
-      vote[type] = vote[type] === value ? 0 : value;
-
-      await saveVote(user, kitId, vote);
-      render();
-    };
-  });
-
-  document.querySelectorAll(".tag").forEach(tag=>{
-    tag.onclick = async()=>{
-      const user = document.getElementById("currentUser").value;
-      const kitId = tag.dataset.kit;
-      const type = tag.dataset.type;
-      const vote = await loadVote(user, kitId);
-
-      vote[type] = !vote[type];
-
-      await saveVote(user, kitId, vote);
-      render();
-    };
-  });
+document.querySelectorAll(".tag").forEach(el=>{
+el.onclick=()=>{
+const user=document.getElementById("currentUser").value;
+const kitId=el.dataset.kit;
+const type=el.dataset.type;
+const v=getVote(user,kitId);
+v[type]=!v[type];
+setDirty(user,kitId);
+render();
+};
+});
 }
 
-async function loadRankings(){
-  const users = ["lindo","linda"];
-  for(const user of users){
-    const data = [];
-
-    for(const team of teams){
-      for(const kit of team.kits){
-        const vote = await loadVote(user, kit.id);
-        data.push({
-          title: kit.title,
-          total: (vote.beauty||0) + (vote.use||0),
-          beauty: vote.beauty || 0,
-          use: vote.use || 0,
-          sair: vote.sair || false,
-          treino: vote.treino || false
-        });
-      }
-    }
-
-    renderRanking(`ranking-geral-${user}`, [...data].sort((a,b)=>b.total-a.total), "total");
-    renderRanking(`ranking-bonita-${user}`, [...data].sort((a,b)=>b.beauty-a.beauty), "beauty");
-    renderRanking(`ranking-uso-${user}`, [...data].sort((a,b)=>b.use-a.use), "use");
-  }
+async function saveAll(){
+const keys=Object.keys(dirty);
+if(!keys.length){statusEl.textContent="Nada novo para salvar.";return}
+statusEl.textContent="Salvando avaliações...";
+for(const key of keys){
+await setDoc(doc(db,"votes",key),votes[key]);
+}
+dirty={};
+statusEl.textContent="Avaliações salvas com sucesso.";
+renderRankings();
 }
 
-function renderRanking(id, data, key){
-  const el = document.getElementById(id);
-  el.innerHTML = "";
+async function loadImages(){
+statusEl.textContent="Buscando imagens no guia...";
+for(const proxy of PROXIES){
+try{
+const html=await fetch(proxy).then(r=>r.text());
+if(!html || html.length<1000) continue;
 
-  data.filter(item=>item[key]>0).forEach((item,index)=>{
-    const div = document.createElement("div");
-    div.className = "ranking-item";
-    div.innerHTML = `
-      <div>
-        <strong>${index+1}. ${item.title}</strong>
-        <div class="badges">
-          ${item.sair ? `<span class="badge">Sair</span>` : ""}
-          ${item.treino ? `<span class="badge">Jogar/Treinar</span>` : ""}
-        </div>
-      </div>
-      <div>⭐ ${item[key]}</div>
-    `;
-    el.appendChild(div);
-  });
+teams.forEach((team,idx)=>{
+const start=html.search(new RegExp(`<h3[^>]*>\\s*${escapeReg(team.name)}\\s*<\\/h3>`,"i"));
+if(start<0) return;
 
-  if(!el.innerHTML){
-    el.innerHTML = `<div class="small">Ainda sem votos.</div>`;
-  }
+let end=html.length;
+for(let j=idx+1;j<teams.length;j++){
+const next=html.search(new RegExp(`<h3[^>]*>\\s*${escapeReg(teams[j].name)}\\s*<\\/h3>`,"i"));
+if(next>start){end=next;break}
 }
 
-document.getElementById("currentUser").addEventListener("change", render);
+const block=html.slice(start,end);
+const imgs=[...block.matchAll(/https?:\/\/assets-mantosdofutebol[^"'\s<>]+?\.(?:jpg|jpeg|png|webp)/gi)]
+.map(m=>m[0].replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,""))
+.filter((v,i,a)=>a.indexOf(v)===i);
 
-const saved = localStorage.getItem("teamsWithImages");
-if(saved){
-  teams = JSON.parse(saved);
-  statusEl.textContent = "Imagens carregadas do navegador. Clique em atualizar se quiser buscar novamente.";
-  render();
-  loadRankings();
-}else{
-  render();
-  loadRankings();
-  loadImagesFromGuide();
+imgs.slice(0,3).forEach((src,i)=>teams[idx].kits[i].image=src);
+});
+
+localStorage.setItem("teamsImages",JSON.stringify(teams.map(t=>t.kits.map(k=>k.image))));
+statusEl.textContent="Imagens atualizadas. Camisas sem imagem continuam pretas.";
+render();
+return;
+}catch(e){}
 }
+statusEl.textContent="Não consegui puxar as imagens automaticamente. Vamos preencher por links diretos se necessário.";
+}
+
+function escapeReg(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+
+function restoreImages(){
+const saved=localStorage.getItem("teamsImages");
+if(!saved) return false;
+const imgs=JSON.parse(saved);
+teams.forEach((t,i)=>t.kits.forEach((k,j)=>k.image=imgs[i]?.[j]||null));
+return true;
+}
+
+function renderRankings(){
+["lindo","linda"].forEach(user=>{
+const data=[];
+teams.forEach(team=>team.kits.forEach(kit=>{
+const v=getVote(user,kit.id);
+data.push({title:kit.title,total:(v.beauty||0)+(v.use||0),beauty:v.beauty||0,use:v.use||0,sair:v.sair,treino:v.treino});
+}));
+rank(`ranking-geral-${user}`,[...data].sort((a,b)=>b.total-a.total),"total");
+rank(`ranking-bonita-${user}`,[...data].sort((a,b)=>b.beauty-a.beauty),"beauty");
+rank(`ranking-uso-${user}`,[...data].sort((a,b)=>b.use-a.use),"use");
+});
+}
+
+function rank(id,data,key){
+const el=document.getElementById(id);
+el.innerHTML="";
+data.filter(x=>x[key]>0).forEach((x,i)=>{
+el.innerHTML+=`
+<div class="ranking-item">
+<div><strong>${i+1}. ${x.title}</strong><br>
+${x.sair?'<span class="badge">Sair</span>':''}
+${x.treino?'<span class="badge">Jogar/Treinar</span>':''}
+</div>
+<div>⭐ ${x[key]}</div>
+</div>`;
+});
+if(!el.innerHTML) el.innerHTML='<div class="small">Ainda sem votos.</div>';
+}
+
+document.getElementById("saveBtn").onclick=saveAll;
+document.getElementById("imageBtn").onclick=loadImages;
+document.getElementById("currentUser").onchange=render;
+
+await loadAllVotes();
+if(!restoreImages()) await loadImages();
+statusEl.textContent="Pronto. Vote e depois clique em Salvar avaliações.";
+render();
 </script>
-
 </body>
 </html>
