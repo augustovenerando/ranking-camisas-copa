@@ -10,8 +10,9 @@ body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;padding:18
 .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 select,button{padding:10px 14px;border-radius:10px;border:0;font-weight:bold}
 button{cursor:pointer;background:#f5c542}
+#clearBtn{background:#b00020;color:white}
 .status{font-size:13px;color:#bbb;margin-top:8px}
-.team{margin:35px 0}
+.team{margin:35px 0;scroll-margin-top:170px}
 .team h2{border-left:6px solid #f5c542;padding-left:10px}
 .kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
 .card{background:#1d1d1d;border:1px solid #333;border-radius:18px;overflow:hidden}
@@ -24,7 +25,7 @@ button{cursor:pointer;background:#f5c542}
 .star.active{filter:none;opacity:1}
 .tag{display:inline-block;border:1px solid #555;border-radius:999px;padding:8px 12px;margin:4px;cursor:pointer}
 .tag.active{background:#f5c542;color:#000;font-weight:bold}
-.rankings{margin-top:40px}
+.rankings{margin-top:40px;scroll-margin-top:170px}
 .ranking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
 .ranking-box{background:#1d1d1d;border:1px solid #333;border-radius:18px;padding:16px}
 .ranking-item{display:flex;justify-content:space-between;border-bottom:1px solid #333;padding:9px 0;gap:8px}
@@ -43,14 +44,19 @@ button{cursor:pointer;background:#f5c542}
 <option value="linda">Linda</option>
 </select>
 <button id="saveBtn">Salvar avaliações</button>
+<button id="clearBtn">Apagar avaliações</button>
 <button id="imageBtn">Atualizar imagens do guia</button>
+<button id="goRankingBtn">Ir para ranking</button>
+<select id="teamJump">
+<option value="">Ir para seleção...</option>
+</select>
 </div>
 <div id="status" class="status">Carregando...</div>
 </div>
 
 <div id="teams"></div>
 
-<section class="rankings">
+<section class="rankings" id="rankings">
 <h2>📊 Rankings</h2>
 <div class="ranking-grid">
 <div class="ranking-box"><h3>⭐ Geral — Lindo</h3><div id="ranking-geral-lindo"></div></div>
@@ -64,7 +70,7 @@ button{cursor:pointer;background:#f5c542}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey:"AIzaSyDm-g6OTM_fDHYSv1FEqDt1ULC281EtK4U",
@@ -109,8 +115,6 @@ let dirty = {};
 const statusEl = document.getElementById("status");
 
 function slug(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"")}
-function norm(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"")}
-
 function emptyVote(){return{beauty:0,use:0,sair:false,treino:false}}
 
 async function loadAllVotes(){
@@ -136,6 +140,25 @@ dirty[`${user}_${kitId}`]=true;
 statusEl.textContent = "Você tem alterações não salvas.";
 }
 
+function setupTeamJump(){
+const teamJump = document.getElementById("teamJump");
+
+teamNames.forEach(name=>{
+const option = document.createElement("option");
+option.value = "team-" + slug(name);
+option.textContent = name;
+teamJump.appendChild(option);
+});
+
+teamJump.onchange=()=>{
+if(teamJump.value){
+const target = document.getElementById(teamJump.value);
+if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
+teamJump.value = "";
+}
+};
+}
+
 function render(){
 const container=document.getElementById("teams");
 const user=document.getElementById("currentUser").value;
@@ -144,6 +167,7 @@ container.innerHTML="";
 teams.forEach(team=>{
 const div=document.createElement("div");
 div.className="team";
+div.id = "team-" + slug(team.name);
 div.innerHTML=`<h2>${team.name}</h2><div class="kits"></div>`;
 const kitsDiv=div.querySelector(".kits");
 
@@ -229,6 +253,28 @@ statusEl.textContent="Avaliações salvas com sucesso.";
 renderRankings();
 }
 
+async function clearCurrentUserVotes(){
+const user = document.getElementById("currentUser").value;
+const label = user === "lindo" ? "Lindo" : "Linda";
+
+const confirmDelete = confirm(`Tem certeza que deseja apagar todas as avaliações do perfil ${label}?`);
+if(!confirmDelete) return;
+
+statusEl.textContent = `Apagando avaliações do perfil ${label}...`;
+
+for(const team of teams){
+for(const kit of team.kits){
+const key = `${user}_${kit.id}`;
+votes[key] = emptyVote();
+delete dirty[key];
+await deleteDoc(doc(db,"votes",key));
+}
+}
+
+statusEl.textContent = `Avaliações do perfil ${label} apagadas.`;
+render();
+}
+
 async function loadImages(){
 statusEl.textContent="Buscando imagens no guia...";
 for(const proxy of PROXIES){
@@ -303,8 +349,14 @@ if(!el.innerHTML) el.innerHTML='<div class="small">Ainda sem votos.</div>';
 }
 
 document.getElementById("saveBtn").onclick=saveAll;
+document.getElementById("clearBtn").onclick=clearCurrentUserVotes;
 document.getElementById("imageBtn").onclick=loadImages;
+document.getElementById("goRankingBtn").onclick=()=>{
+document.getElementById("rankings").scrollIntoView({behavior:"smooth",block:"start"});
+};
 document.getElementById("currentUser").onchange=render;
+
+setupTeamJump();
 
 await loadAllVotes();
 if(!restoreImages()) await loadImages();
