@@ -1,0 +1,617 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Ranking Camisas Copa 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#111;
+    color:white;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:30px;
+    color:#bbb;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:#111;
+    padding:15px 0;
+    margin-bottom:20px;
+}
+
+select{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+
+.section-title{
+    margin-top:50px;
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+.team{
+    margin-bottom:60px;
+}
+
+.team h2{
+    margin-bottom:20px;
+    border-left:5px solid #fff;
+    padding-left:10px;
+}
+
+.kits{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#1b1b1b;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid #333;
+}
+
+.image-container{
+    height:320px;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.image-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.placeholder{
+    color:#666;
+    text-align:center;
+    padding:20px;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.kit-title{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.question{
+    margin-bottom:20px;
+}
+
+.question p{
+    margin-bottom:10px;
+}
+
+.stars{
+    display:flex;
+    gap:5px;
+}
+
+.star{
+    font-size:28px;
+    cursor:pointer;
+    opacity:0.3;
+    transition:0.2s;
+}
+
+.star.active{
+    opacity:1;
+}
+
+.tags{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.tag{
+    border:1px solid #555;
+    padding:10px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.tag.active{
+    background:white;
+    color:black;
+    border-color:white;
+}
+
+.ranking-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.ranking-box{
+    background:#1b1b1b;
+    border-radius:20px;
+    padding:20px;
+}
+
+.ranking-box h3{
+    margin-bottom:20px;
+}
+
+.ranking-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #333;
+}
+
+.badges{
+    display:flex;
+    gap:6px;
+}
+
+.badge{
+    background:#333;
+    padding:4px 8px;
+    border-radius:999px;
+    font-size:12px;
+}
+
+@media(max-width:900px){
+    .ranking-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <h1>🏆 Ranking Camisas Copa 2026</h1>
+    <div class="subtitle">Lindo vs Linda</div>
+
+    <select id="currentUser">
+        <option value="lindo">Lindo</option>
+        <option value="linda">Linda</option>
+    </select>
+</div>
+
+<div id="teams"></div>
+
+<h2 class="section-title">📊 Rankings</h2>
+
+<div class="ranking-grid">
+
+    <div class="ranking-box">
+        <h3>⭐ Ranking Geral — Lindo</h3>
+        <div id="ranking-geral-lindo"></div>
+    </div>
+
+    <div class="ranking-box">
+        <h3>⭐ Ranking Geral — Linda</h3>
+        <div id="ranking-geral-linda"></div>
+    </div>
+
+    <div class="ranking-box">
+        <h3>🎨 Mais Bonitas — Lindo</h3>
+        <div id="ranking-bonita-lindo"></div>
+    </div>
+
+    <div class="ranking-box">
+        <h3>🎨 Mais Bonitas — Linda</h3>
+        <div id="ranking-bonita-linda"></div>
+    </div>
+
+    <div class="ranking-box">
+        <h3>👕 Usaria Depois — Lindo</h3>
+        <div id="ranking-uso-lindo"></div>
+    </div>
+
+    <div class="ranking-box">
+        <h3>👕 Usaria Depois — Linda</h3>
+        <div id="ranking-uso-linda"></div>
+    </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDm-g6OTM_fDHYSv1FEqDt1ULC281EtK4U",
+  authDomain: "ranking-camisas-copa-202-3a2f2.firebaseapp.com",
+  projectId: "ranking-camisas-copa-202-3a2f2",
+  storageBucket: "ranking-camisas-copa-202-3a2f2.firebasestorage.app",
+  messagingSenderId: "909673035671",
+  appId: "1:909673035671:web:eeb3ba06a51374f6d8f6d2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const teams = [
+
+{
+    name:"Brasil",
+    kits:[
+        {
+            id:"brasil1",
+            title:"Brasil 1",
+            image:"https://mantosdofutebol.com.br/wp-content/uploads/2026/06/Camisa-titular-do-Brasil-2026-Nike.jpg"
+        },
+        {
+            id:"brasil2",
+            title:"Brasil 2",
+            image:"https://mantosdofutebol.com.br/wp-content/uploads/2026/06/Camisa-reserva-do-Brasil-2026-Nike.jpg"
+        },
+        {
+            id:"brasil3",
+            title:"Brasil 3",
+            image:null
+        }
+    ]
+},
+
+{
+    name:"Argentina",
+    kits:[
+        {
+            id:"argentina1",
+            title:"Argentina 1",
+            image:null
+        },
+        {
+            id:"argentina2",
+            title:"Argentina 2",
+            image:null
+        },
+        {
+            id:"argentina3",
+            title:"Argentina 3",
+            image:null
+        }
+    ]
+}
+
+];
+
+const teamsContainer = document.getElementById("teams");
+
+function createStars(current, callback){
+
+    const starsContainer = document.createElement("div");
+    starsContainer.className = "stars";
+
+    for(let i=1;i<=5;i++){
+
+        const star = document.createElement("div");
+        star.className = "star";
+        star.innerHTML = "⭐";
+
+        if(i <= current){
+            star.classList.add("active");
+        }
+
+        star.onclick = ()=> callback(i);
+
+        starsContainer.appendChild(star);
+    }
+
+    return starsContainer;
+}
+
+async function saveVote(user, kitId, data){
+
+    await setDoc(
+        doc(db,"votes",`${user}_${kitId}`),
+        data
+    );
+
+    loadRankings();
+}
+
+async function loadVote(user, kitId){
+
+    const ref = doc(db,"votes",`${user}_${kitId}`);
+    const snap = await getDoc(ref);
+
+    if(snap.exists()){
+        return snap.data();
+    }
+
+    return {
+        beauty:0,
+        use:0,
+        sair:false,
+        treino:false
+    };
+}
+
+async function render(){
+
+    teamsContainer.innerHTML = "";
+
+    const currentUser = document.getElementById("currentUser").value;
+
+    for(const team of teams){
+
+        const teamDiv = document.createElement("div");
+        teamDiv.className = "team";
+
+        teamDiv.innerHTML = `<h2>${team.name}</h2>`;
+
+        const kitsDiv = document.createElement("div");
+        kitsDiv.className = "kits";
+
+        for(const kit of team.kits){
+
+            const vote = await loadVote(currentUser,kit.id);
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+                <div class="image-container">
+                    ${
+                        kit.image
+                        ? `<img src="${kit.image}">`
+                        : `<div class="placeholder">Camisa ainda não divulgada</div>`
+                    }
+                </div>
+
+                <div class="card-content">
+
+                    <div class="kit-title">${kit.title}</div>
+
+                    <div class="question">
+                        <p>Eu acho ela bonita?</p>
+                        <div id="beauty-${kit.id}"></div>
+                    </div>
+
+                    <div class="question">
+                        <p>Eu usaria depois da Copa?</p>
+                        <div id="use-${kit.id}"></div>
+                    </div>
+
+                    <div class="question">
+                        <p>Eu usaria para:</p>
+
+                        <div class="tags">
+
+                            <div class="tag ${vote.sair ? 'active':''}" id="sair-${kit.id}">
+                                Sair
+                            </div>
+
+                            <div class="tag ${vote.treino ? 'active':''}" id="treino-${kit.id}">
+                                Jogar/Treinar
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+            kitsDiv.appendChild(card);
+
+            setTimeout(()=>{
+
+                document
+                    .getElementById(`beauty-${kit.id}`)
+                    .appendChild(
+                        createStars(vote.beauty, async(value)=>{
+
+                            vote.beauty = value;
+
+                            await saveVote(currentUser,kit.id,vote);
+
+                            render();
+                        })
+                    );
+
+                document
+                    .getElementById(`use-${kit.id}`)
+                    .appendChild(
+                        createStars(vote.use, async(value)=>{
+
+                            vote.use = value;
+
+                            await saveVote(currentUser,kit.id,vote);
+
+                            render();
+                        })
+                    );
+
+                document
+                    .getElementById(`sair-${kit.id}`)
+                    .onclick = async()=>{
+
+                        vote.sair = !vote.sair;
+
+                        await saveVote(currentUser,kit.id,vote);
+
+                        render();
+                    };
+
+                document
+                    .getElementById(`treino-${kit.id}`)
+                    .onclick = async()=>{
+
+                        vote.treino = !vote.treino;
+
+                        await saveVote(currentUser,kit.id,vote);
+
+                        render();
+                    };
+
+            },0);
+
+        }
+
+        teamDiv.appendChild(kitsDiv);
+        teamsContainer.appendChild(teamDiv);
+    }
+
+}
+
+async function loadRankings(){
+
+    const lindo = [];
+    const linda = [];
+
+    for(const team of teams){
+
+        for(const kit of team.kits){
+
+            const lindoVote = await loadVote("lindo",kit.id);
+            const lindaVote = await loadVote("linda",kit.id);
+
+            lindo.push({
+                title:kit.title,
+                total:lindoVote.beauty + lindoVote.use,
+                beauty:lindoVote.beauty,
+                use:lindoVote.use,
+                sair:lindoVote.sair,
+                treino:lindoVote.treino
+            });
+
+            linda.push({
+                title:kit.title,
+                total:lindaVote.beauty + lindaVote.use,
+                beauty:lindaVote.beauty,
+                use:lindaVote.use,
+                sair:lindaVote.sair,
+                treino:lindaVote.treino
+            });
+
+        }
+
+    }
+
+    renderRanking(
+        "ranking-geral-lindo",
+        [...lindo].sort((a,b)=>b.total-a.total),
+        "total"
+    );
+
+    renderRanking(
+        "ranking-geral-linda",
+        [...linda].sort((a,b)=>b.total-a.total),
+        "total"
+    );
+
+    renderRanking(
+        "ranking-bonita-lindo",
+        [...lindo].sort((a,b)=>b.beauty-a.beauty),
+        "beauty"
+    );
+
+    renderRanking(
+        "ranking-bonita-linda",
+        [...linda].sort((a,b)=>b.beauty-a.beauty),
+        "beauty"
+    );
+
+    renderRanking(
+        "ranking-uso-lindo",
+        [...lindo].sort((a,b)=>b.use-a.use),
+        "use"
+    );
+
+    renderRanking(
+        "ranking-uso-linda",
+        [...linda].sort((a,b)=>b.use-a.use),
+        "use"
+    );
+
+}
+
+function renderRanking(elementId,data,key){
+
+    const el = document.getElementById(elementId);
+
+    el.innerHTML = "";
+
+    data.forEach(item=>{
+
+        const div = document.createElement("div");
+        div.className = "ranking-item";
+
+        div.innerHTML = `
+            <div>
+                <strong>${item.title}</strong>
+
+                <div class="badges">
+                    ${item.sair ? '<div class="badge">Sair</div>' : ''}
+                    ${item.treino ? '<div class="badge">Jogar/Treinar</div>' : ''}
+                </div>
+            </div>
+
+            <div>
+                ⭐ ${item[key]}
+            </div>
+        `;
+
+        el.appendChild(div);
+
+    });
+
+}
+
+document
+    .getElementById("currentUser")
+    .addEventListener("change",render);
+
+render();
+loadRankings();
+
+</script>
+
+</body>
+</html>
+```
