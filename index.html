@@ -138,23 +138,45 @@ line-height:1.15;
 font-size:12px;
 margin-bottom:10px;
 }
+
 .controls{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px;
+gap:10px;
+align-items:stretch;
 }
-select,button{
+
+.controls select,
+.controls button{
 width:100%;
-padding:10px 8px;
-font-size:12px;
-border-radius:11px;
+height:54px;
+padding:0 10px;
+font-size:13px;
+line-height:1.15;
+text-align:center;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+}
+
+#currentUser,
+#teamJump{
+height:54px;
+}
+
+#clearBtn{
+grid-column:1 / -1;
+}
+
+#saveBtn{
+grid-column:1 / -1;
+height:56px;
 }
 #currentUser,#teamJump{
 grid-column:span 1;
 }
-#saveBtn{
-grid-column:1 / -1;
-}
+
 .status{
 font-size:12px;
 line-height:1.3;
@@ -234,16 +256,7 @@ padding:3px 6px;
 .ranking-item strong{
 font-size:12px;
 }
-.ranking-box{
-border-radius:18px;
-padding:14px;
-}
-.ranking-box h3{
-font-size:18px;
-}
-.ranking-item{
-font-size:14px;
-}
+
 }
 </style>
 </head>
@@ -261,7 +274,7 @@ onerror="this.style.display='none'"
 </div>
 
 <div class="subtitle">
-Lindo vs Linda • Uniformes da Copa do Mundo 2026
+Lindo vs Linda • Uniformes da Copa do Mundo 2026!
 </div>
 
 <div class="controls">
@@ -474,7 +487,9 @@ div.innerHTML = `
 
 const kitsDiv = div.querySelector(".kits");
 
-team.kits.forEach(kit=>{
+team.kits
+.filter(kit => kit.image)
+.forEach(kit=>{
 const v = getVote(user,kit.id);
 const card = document.createElement("div");
 card.className = "card";
@@ -508,7 +523,9 @@ ${kit.image ? `<img src="${kit.image}" onerror="this.parentElement.innerHTML='Ca
 kitsDiv.appendChild(card);
 });
 
+if(kitsDiv.children.length > 0){
 container.appendChild(div);
+}
 });
 
 bindActions();
