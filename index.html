@@ -74,8 +74,30 @@ box-shadow:0 12px 30px rgba(0,0,0,.25);
 .kit-title{font-size:22px;font-weight:800;margin-bottom:16px}
 .question{margin:18px 0}
 .question p{margin-bottom:10px;color:#e7e7f0;font-weight:600}
-.star{font-size:28px;cursor:pointer;filter:grayscale(1);opacity:.28;transition:.15s}
-.star.active{filter:none;opacity:1}
+.star{
+font-size:28px;
+cursor:pointer;
+filter:grayscale(1);
+opacity:.28;
+transition:transform .18s ease, opacity .18s ease, filter .18s ease;
+display:inline-block;
+}
+
+.star:hover{
+transform:scale(1.18) rotate(-4deg);
+}
+
+.star.active{
+filter:none;
+opacity:1;
+animation:starPop .22s ease;
+}
+
+@keyframes starPop{
+0%{transform:scale(.85)}
+60%{transform:scale(1.22)}
+100%{transform:scale(1)}
+}
 .tag{display:inline-block;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);margin-right:8px;margin-top:6px;cursor:pointer;background:#20202e}
 .tag.active{background:linear-gradient(135deg,var(--gold),#ffd95c);color:black;font-weight:800;border-color:transparent}
 .rankings{margin-top:50px;scroll-margin-top:170px}
@@ -496,7 +518,12 @@ card.className = "card";
 
 card.innerHTML = `
 <div class="imgbox">
-${kit.image ? `<img src="${kit.image}" onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'">` : `Camisa ainda não divulgada`}
+${kit.image ? `<img 
+src="${kit.image}" 
+loading="lazy"
+decoding="async"
+onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'"
+>` : `Camisa ainda não divulgada`}
 </div>
 
 <div class="content">
@@ -696,6 +723,13 @@ return b.total - a.total;
 });
 }
 
+function medal(index){
+if(index === 0) return "🥇";
+if(index === 1) return "🥈";
+if(index === 2) return "🥉";
+return "";
+}
+
 function rank(id,data,key){
 const el = document.getElementById(id);
 el.innerHTML = "";
@@ -704,7 +738,7 @@ data.filter(x=>x[key]>0).forEach((x,i)=>{
 el.innerHTML += `
 <div class="ranking-item">
 <div>
-<strong>${i+1}. ${x.title}</strong><br>
+<strong>${medal(i)} ${i+1}. ${x.title}</strong><br>
 ${x.sair ? '<span class="badge">Sair</span>' : ''}
 ${x.treino ? '<span class="badge">Jogar/Treinar</span>' : ''}
 </div>
@@ -728,7 +762,7 @@ data
 el.innerHTML += `
 <div class="ranking-item">
 <div>
-<strong>${i+1}. ${x.title}</strong><br>
+<strong>${medal(i)} ${i+1}. ${x.title}</strong><br>
 ${x.sair ? '<span class="badge">Sair</span>' : ''}
 ${x.treino ? '<span class="badge">Jogar/Treinar</span>' : ''}
 </div>
