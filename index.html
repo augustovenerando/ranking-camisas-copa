@@ -261,7 +261,7 @@ select,button{width:100%}
 <div class="topbar">
 <div class="header-title">
 <img
-src="https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/960px-2026_FIFA_World_Cup_emblem.svg.png"
+src="https://commons.wikimedia.org/wiki/Special:Redirect/file/2026%20FIFA%20World%20Cup%20emblem%20(horizontal%2C%20with%20wordmark).svg"
 alt="FIFA World Cup 2026"
 onerror="this.style.display='none'"
 >
@@ -675,7 +675,15 @@ treino:v.treino
 
 rank(`ranking-geral-${user}`,[...data].sort((a,b)=>b.total-a.total),"total");
 rank(`ranking-bonita-${user}`,[...data].sort((a,b)=>b.beauty-a.beauty),"beauty");
-rank(`ranking-uso-${user}`,[...data].sort((a,b)=>b.use-a.use),"use");
+
+rankUso(`ranking-uso-${user}`,[...data].sort((a,b)=>{
+const scoreA = (a.sair && a.treino) ? 3 : a.sair ? 2 : a.treino ? 1 : 0;
+const scoreB = (b.sair && b.treino) ? 3 : b.sair ? 2 : b.treino ? 1 : 0;
+
+if(scoreB !== scoreA) return scoreB - scoreA;
+
+return b.total - a.total;
+}));
 });
 }
 
@@ -692,6 +700,30 @@ ${x.sair ? '<span class="badge">Sair</span>' : ''}
 ${x.treino ? '<span class="badge">Jogar/Treinar</span>' : ''}
 </div>
 <div>★ ${x[key]}</div>
+</div>
+`;
+});
+
+if(!el.innerHTML){
+el.innerHTML = '<div class="small">Ainda sem votos.</div>';
+}
+}
+
+function rankUso(id,data){
+const el = document.getElementById(id);
+el.innerHTML = "";
+
+data
+.filter(x=>x.sair || x.treino)
+.forEach((x,i)=>{
+el.innerHTML += `
+<div class="ranking-item">
+<div>
+<strong>${i+1}. ${x.title}</strong><br>
+${x.sair ? '<span class="badge">Sair</span>' : ''}
+${x.treino ? '<span class="badge">Jogar/Treinar</span>' : ''}
+</div>
+<div>★ ${x.total}</div>
 </div>
 `;
 });
