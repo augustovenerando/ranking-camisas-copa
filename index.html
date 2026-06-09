@@ -732,7 +732,7 @@ function rank(id,data,key){
 const el = document.getElementById(id);
 el.innerHTML = "";
 
-data.filter(x=>x[key]>0).forEach((x,i)=>{
+data.filter(x=>x[key]>0).slice(0,10).forEach((x,i)=>{
 el.innerHTML += `
 <div class="ranking-item">
 <div>
@@ -756,6 +756,7 @@ el.innerHTML = "";
 
 data
 .filter(x=>x.sair || x.treino)
+.slice(0,10)
 .forEach((x,i)=>{
 el.innerHTML += `
 <div class="ranking-item">
