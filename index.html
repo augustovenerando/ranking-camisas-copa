@@ -4,73 +4,441 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ranking Camisas Copa 2026</title>
+
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;padding:18px}
-.topbar{position:sticky;top:0;z-index:10;background:#111;border-bottom:1px solid #333;padding:12px;text-align:center}
-.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-select,button{padding:10px 14px;border-radius:10px;border:0;font-weight:bold}
-button{cursor:pointer;background:#f5c542}
-#clearBtn{background:#b00020;color:white}
-.status{font-size:13px;color:#bbb;margin-top:8px}
-.team{margin:35px 0;scroll-margin-top:170px}
-.team h2{border-left:6px solid #f5c542;padding-left:10px}
-.kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{background:#1d1d1d;border:1px solid #333;border-radius:18px;overflow:hidden}
-.imgbox{height:300px;background:#000;display:flex;align-items:center;justify-content:center;color:#777;text-align:center}
-.imgbox img{width:100%;height:100%;object-fit:contain;background:#fff}
-.content{padding:16px}
-.kit-title{font-size:20px;font-weight:bold;margin-bottom:12px}
-.question{margin:14px 0}
-.star{font-size:26px;cursor:pointer;filter:grayscale(1);opacity:.35}
-.star.active{filter:none;opacity:1}
-.tag{display:inline-block;border:1px solid #555;border-radius:999px;padding:8px 12px;margin:4px;cursor:pointer}
-.tag.active{background:#f5c542;color:#000;font-weight:bold}
-.rankings{margin-top:40px;scroll-margin-top:170px}
-.ranking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-.ranking-box{background:#1d1d1d;border:1px solid #333;border-radius:18px;padding:16px}
-.ranking-item{display:flex;justify-content:space-between;border-bottom:1px solid #333;padding:9px 0;gap:8px}
-.badge{font-size:11px;background:#333;border-radius:999px;padding:3px 7px;margin-right:4px}
-.small{font-size:12px;color:#aaa}
+
+:root{
+--bg:#0b0b12;
+--card:#161621;
+--border:#2b2b3b;
+--text:#ffffff;
+--muted:#bbbbcc;
+--primary:#ff4d4d;
+--blue:#4f6bff;
+--purple:#9b6dff;
+--green:#c5ff00;
+--orange:#ff6a00;
+--gold:#f5c542;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:
+radial-gradient(circle at top left, rgba(255,77,77,.18), transparent 25%),
+radial-gradient(circle at top right, rgba(79,107,255,.18), transparent 25%),
+radial-gradient(circle at bottom left, rgba(197,255,0,.12), transparent 25%),
+radial-gradient(circle at bottom right, rgba(155,109,255,.14), transparent 25%),
+linear-gradient(135deg,#0b0b12,#12121b 60%,#171725);
+color:var(--text);
+padding:18px;
+min-height:100vh;
+}
+
+.topbar{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(12,12,18,.92);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.06);
+border-radius:24px;
+padding:18px;
+margin-bottom:24px;
+box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+.header-title{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:14px;
+margin-bottom:8px;
+}
+
+.header-title img{
+width:46px;
+height:46px;
+object-fit:contain;
+}
+
+h1{
+font-size:32px;
+font-weight:800;
+}
+
+.subtitle{
+text-align:center;
+color:var(--muted);
+margin-bottom:16px;
+font-size:14px;
+}
+
+.controls{
+display:flex;
+gap:10px;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+}
+
+select,button{
+padding:12px 16px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.08);
+background:#1d1d29;
+color:white;
+font-weight:700;
+font-size:14px;
+}
+
+button{
+cursor:pointer;
+transition:.2s;
+}
+
+button:hover{
+transform:translateY(-1px);
+opacity:.92;
+}
+
+#imageBtn{
+background:linear-gradient(135deg,var(--blue),#6d83ff);
+}
+
+#goRankingBtn{
+background:linear-gradient(135deg,var(--purple),#b084ff);
+}
+
+#clearBtn{
+background:linear-gradient(135deg,#c70039,#ff4d6d);
+}
+
+#saveBtn{
+background:linear-gradient(135deg,var(--green),#86d400);
+color:black;
+}
+
+.status{
+text-align:center;
+margin-top:12px;
+font-size:13px;
+color:var(--muted);
+}
+
+.team{
+margin:42px 0;
+scroll-margin-top:170px;
+}
+
+.team h2{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:30px;
+margin-bottom:18px;
+padding-left:12px;
+border-left:6px solid var(--gold);
+}
+
+.kits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+background:linear-gradient(180deg,#1a1a26,#141420);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 12px 30px rgba(0,0,0,.25);
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.imgbox{
+height:320px;
+background:
+linear-gradient(135deg,
+rgba(255,77,77,.15),
+rgba(79,107,255,.12),
+rgba(197,255,0,.08));
+display:flex;
+align-items:center;
+justify-content:center;
+color:#888;
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.imgbox::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(135deg,
+transparent,
+rgba(255,255,255,.03));
+pointer-events:none;
+}
+
+.imgbox img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:white;
+border-radius:12px;
+padding:10px;
+}
+
+.content{
+padding:18px;
+}
+
+.kit-title{
+font-size:22px;
+font-weight:800;
+margin-bottom:16px;
+}
+
+.question{
+margin:18px 0;
+}
+
+.question p{
+margin-bottom:10px;
+color:#e7e7f0;
+font-weight:600;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+filter:grayscale(1);
+opacity:.28;
+transition:.15s;
+}
+
+.star:hover{
+transform:scale(1.08);
+}
+
+.star.active{
+filter:none;
+opacity:1;
+}
+
+.tag{
+display:inline-block;
+padding:9px 14px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,.1);
+margin-right:8px;
+margin-top:6px;
+cursor:pointer;
+background:#20202e;
+transition:.2s;
+}
+
+.tag.active{
+background:linear-gradient(135deg,var(--gold),#ffd95c);
+color:black;
+font-weight:800;
+border-color:transparent;
+}
+
+.rankings{
+margin-top:50px;
+scroll-margin-top:170px;
+}
+
+.rankings h2{
+font-size:34px;
+margin-bottom:22px;
+}
+
+.ranking-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+.ranking-box{
+background:linear-gradient(180deg,#1a1a26,#141420);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+padding:18px;
+box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+.ranking-box h3{
+margin-bottom:16px;
+font-size:22px;
+}
+
+.ranking-item{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.badge{
+display:inline-block;
+font-size:11px;
+padding:4px 8px;
+border-radius:999px;
+margin-top:6px;
+margin-right:6px;
+background:#2b2b3b;
+}
+
+.small{
+color:var(--muted);
+font-size:13px;
+}
+
+@media(max-width:700px){
+
+h1{
+font-size:24px;
+}
+
+.team h2{
+font-size:24px;
+}
+
+.controls{
+flex-direction:column;
+align-items:stretch;
+}
+
+select,button{
+width:100%;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="topbar">
-<h1>🏆 Ranking Camisas Copa 2026</h1>
-<div>Lindo vs Linda</div>
-<div class="controls">
-<select id="currentUser">
-<option value="lindo">Lindo</option>
-<option value="linda">Linda</option>
-</select>
-<button id="saveBtn">Salvar avaliações</button>
-<button id="clearBtn">Apagar avaliações</button>
-<button id="imageBtn">Atualizar imagens do guia</button>
-<button id="goRankingBtn">Ir para ranking</button>
-<select id="teamJump">
-<option value="">Ir para seleção...</option>
-</select>
+
+<div class="header-title">
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FIFA_World_Cup_2026_logo.svg/512px-FIFA_World_Cup_2026_logo.svg.png">
+<h1>Ranking Camisas Copa 2026</h1>
 </div>
-<div id="status" class="status">Carregando...</div>
+
+<div class="subtitle">
+Lindo vs Linda • Álbum de figurinhas dos uniformes da Copa do Mundo 2026
+</div>
+
+<div class="controls">
+
+<select id="currentUser">
+<option value="lindo">👨 Lindo</option>
+<option value="linda">👩 Linda</option>
+</select>
+
+<select id="teamJump">
+<option value="">🌍 Ir para seleção...</option>
+</select>
+
+<button id="imageBtn">
+🖼️ Atualizar imagens
+</button>
+
+<button id="goRankingBtn">
+📊 Ir para ranking
+</button>
+
+<button id="clearBtn">
+🗑️ Apagar avaliações
+</button>
+
+<button id="saveBtn">
+💾 Salvar avaliações
+</button>
+
+</div>
+
+<div id="status" class="status">
+Carregando...
+</div>
+
 </div>
 
 <div id="teams"></div>
 
 <section class="rankings" id="rankings">
-<h2>📊 Rankings</h2>
+
+<h2>
+📊 Rankings
+</h2>
+
 <div class="ranking-grid">
-<div class="ranking-box"><h3>⭐ Geral — Lindo</h3><div id="ranking-geral-lindo"></div></div>
-<div class="ranking-box"><h3>⭐ Geral — Linda</h3><div id="ranking-geral-linda"></div></div>
-<div class="ranking-box"><h3>🎨 Bonita — Lindo</h3><div id="ranking-bonita-lindo"></div></div>
-<div class="ranking-box"><h3>🎨 Bonita — Linda</h3><div id="ranking-bonita-linda"></div></div>
-<div class="ranking-box"><h3>👕 Usaria depois — Lindo</h3><div id="ranking-uso-lindo"></div></div>
-<div class="ranking-box"><h3>👕 Usaria depois — Linda</h3><div id="ranking-uso-linda"></div></div>
+
+<div class="ranking-box">
+<h3>⭐ Geral — Lindo</h3>
+<div id="ranking-geral-lindo"></div>
+</div>
+
+<div class="ranking-box">
+<h3>⭐ Geral — Linda</h3>
+<div id="ranking-geral-linda"></div>
+</div>
+
+<div class="ranking-box">
+<h3>🎨 Bonita — Lindo</h3>
+<div id="ranking-bonita-lindo"></div>
+</div>
+
+<div class="ranking-box">
+<h3>🎨 Bonita — Linda</h3>
+<div id="ranking-bonita-linda"></div>
+</div>
+
+<div class="ranking-box">
+<h3>👕 Usaria depois — Lindo</h3>
+<div id="ranking-uso-lindo"></div>
+</div>
+
+<div class="ranking-box">
+<h3>👕 Usaria depois — Linda</h3>
+<div id="ranking-uso-linda"></div>
+</div>
+
 </div>
 </section>
 
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc,
+deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey:"AIzaSyDm-g6OTM_fDHYSv1FEqDt1ULC281EtK4U",
@@ -84,11 +452,43 @@ appId:"1:909673035671:web:eeb3ba06a51374f6d8f6d2"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const GUIDE = "https://mantosdofutebol.com.br/2026/06/camisas-copa-do-mundo-2026/";
-const PROXIES = [
-"https://api.allorigins.win/raw?url=" + encodeURIComponent(GUIDE),
-"https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(GUIDE)
-];
+const flags = {
+"Brasil":"🇧🇷",
+"Argentina":"🇦🇷",
+"França":"🇫🇷",
+"Inglaterra":"🏴",
+"Portugal":"🇵🇹",
+"Espanha":"🇪🇸",
+"Alemanha":"🇩🇪",
+"Uruguai":"🇺🇾",
+"Holanda":"🇳🇱",
+"Bélgica":"🇧🇪",
+"Estados Unidos":"🇺🇸",
+"México":"🇲🇽",
+"Japão":"🇯🇵",
+"Croácia":"🇭🇷",
+"Colômbia":"🇨🇴",
+"Marrocos":"🇲🇦",
+"Canadá":"🇨🇦",
+"Austrália":"🇦🇺",
+"Suíça":"🇨🇭",
+"Suécia":"🇸🇪",
+"Noruega":"🇳🇴",
+"Panamá":"🇵🇦",
+"Gana":"🇬🇭",
+"Paraguai":"🇵🇾",
+"Equador":"🇪🇨",
+"Senegal":"🇸🇳",
+"Argélia":"🇩🇿",
+"Egito":"🇪🇬",
+"Catar":"🇶🇦",
+"Arábia Saudita":"🇸🇦",
+"Coréia do Sul":"🇰🇷",
+"Nova Zelândia":"🇳🇿",
+"Escócia":"🏴",
+"Turquia":"🇹🇷",
+"Áustria":"🇦🇹"
+};
 
 const teamNames = [
 "México","África do Sul","Coréia do Sul","República Tcheca",
@@ -107,261 +507,498 @@ const teamNames = [
 
 const teams = teamNames.map(name=>({
 name,
-kits:[1,2,3].map(n=>({id:slug(name)+n,title:`${name} ${n}`,image:null}))
+kits:[1,2,3].map(n=>({
+id:slug(name)+n,
+title:`${name} ${n}`,
+image:null
+}))
 }));
 
 let votes = {};
 let dirty = {};
+
 const statusEl = document.getElementById("status");
 
-function slug(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"")}
-function emptyVote(){return{beauty:0,use:0,sair:false,treino:false}}
-
-async function loadAllVotes(){
-for(const user of ["lindo","linda"]){
-for(const team of teams){
-for(const kit of team.kits){
-const id = `${user}_${kit.id}`;
-const snap = await getDoc(doc(db,"votes",id));
-votes[id] = snap.exists()?snap.data():emptyVote();
-}
-}
-}
+function slug(t){
+return t.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-z0-9]+/g,"-")
+.replace(/(^-|-$)/g,"");
 }
 
-function getVote(user,kitId){
-const id = `${user}_${kitId}`;
-if(!votes[id]) votes[id]=emptyVote();
-return votes[id];
-}
-
-function setDirty(user,kitId){
-dirty[`${user}_${kitId}`]=true;
-statusEl.textContent = "Você tem alterações não salvas.";
-}
-
-function setupTeamJump(){
-const teamJump = document.getElementById("teamJump");
-
-teamNames.forEach(name=>{
-const option = document.createElement("option");
-option.value = "team-" + slug(name);
-option.textContent = name;
-teamJump.appendChild(option);
-});
-
-teamJump.onchange=()=>{
-if(teamJump.value){
-const target = document.getElementById(teamJump.value);
-if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
-teamJump.value = "";
-}
+function emptyVote(){
+return{
+beauty:0,
+use:0,
+sair:false,
+treino:false
 };
 }
 
+async function loadAllVotes(){
+
+for(const user of ["lindo","linda"]){
+
+for(const team of teams){
+
+for(const kit of team.kits){
+
+const id = `${user}_${kit.id}`;
+
+const snap = await getDoc(doc(db,"votes",id));
+
+votes[id] = snap.exists()
+? snap.data()
+: emptyVote();
+
+}
+
+}
+
+}
+
+}
+
+function getVote(user,kitId){
+
+const id = `${user}_${kitId}`;
+
+if(!votes[id]){
+votes[id] = emptyVote();
+}
+
+return votes[id];
+
+}
+
+function setDirty(user,kitId){
+
+dirty[`${user}_${kitId}`] = true;
+
+statusEl.textContent =
+"Você tem alterações não salvas.";
+
+}
+
+function setupTeamJump(){
+
+const teamJump =
+document.getElementById("teamJump");
+
+teamNames.forEach(name=>{
+
+const option = document.createElement("option");
+
+option.value = "team-" + slug(name);
+
+option.textContent =
+`${flags[name] || "🏳️"} ${name}`;
+
+teamJump.appendChild(option);
+
+});
+
+teamJump.onchange = ()=>{
+
+if(teamJump.value){
+
+const target =
+document.getElementById(teamJump.value);
+
+if(target){
+
+target.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+teamJump.value = "";
+
+}
+
+};
+
+}
+
 function render(){
-const container=document.getElementById("teams");
-const user=document.getElementById("currentUser").value;
-container.innerHTML="";
+
+const container =
+document.getElementById("teams");
+
+const user =
+document.getElementById("currentUser").value;
+
+container.innerHTML = "";
 
 teams.forEach(team=>{
-const div=document.createElement("div");
-div.className="team";
+
+const div = document.createElement("div");
+
+div.className = "team";
+
 div.id = "team-" + slug(team.name);
-div.innerHTML=`<h2>${team.name}</h2><div class="kits"></div>`;
-const kitsDiv=div.querySelector(".kits");
+
+div.innerHTML = `
+<h2>
+${flags[team.name] || "🏳️"}
+${team.name}
+</h2>
+<div class="kits"></div>
+`;
+
+const kitsDiv = div.querySelector(".kits");
 
 team.kits.forEach(kit=>{
-const v=getVote(user,kit.id);
-const card=document.createElement("div");
-card.className="card";
-card.innerHTML=`
+
+const v = getVote(user,kit.id);
+
+const card = document.createElement("div");
+
+card.className = "card";
+
+card.innerHTML = `
+
 <div class="imgbox">
-${kit.image?`<img src="${kit.image}" onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'">`:`Camisa ainda não divulgada`}
+
+${kit.image
+? `<img src="${kit.image}" onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'">`
+: `Camisa ainda não divulgada`
+}
+
 </div>
+
 <div class="content">
-<div class="kit-title">${kit.title}</div>
+
+<div class="kit-title">
+${kit.title}
+</div>
 
 <div class="question">
 <p>Eu acho ela bonita?</p>
-<div>${stars(v.beauty,"beauty",kit.id)}</div>
+<div>
+${stars(v.beauty,"beauty",kit.id)}
+</div>
 </div>
 
 <div class="question">
 <p>Eu usaria depois da Copa?</p>
-<div>${stars(v.use,"use",kit.id)}</div>
+<div>
+${stars(v.use,"use",kit.id)}
+</div>
 </div>
 
 <div class="question">
 <p>Eu usaria para:</p>
-<span class="tag ${v.sair?"active":""}" data-kit="${kit.id}" data-type="sair">Sair</span>
-<span class="tag ${v.treino?"active":""}" data-kit="${kit.id}" data-type="treino">Jogar/Treinar</span>
+
+<span class="tag ${v.sair ? "active":""}"
+data-kit="${kit.id}"
+data-type="sair">
+Sair
+</span>
+
+<span class="tag ${v.treino ? "active":""}"
+data-kit="${kit.id}"
+data-type="treino">
+Jogar/Treinar
+</span>
+
 </div>
-</div>`;
+
+</div>
+`;
+
 kitsDiv.appendChild(card);
+
 });
+
 container.appendChild(div);
+
 });
+
 bindActions();
+
 renderRankings();
+
 }
 
 function stars(value,type,kitId){
-let html="";
+
+let html = "";
+
 for(let i=1;i<=5;i++){
-html+=`<span class="star ${i<=value?"active":""}" data-kit="${kitId}" data-type="${type}" data-value="${i}">⭐</span>`;
+
+html += `
+<span class="star ${i<=value ? "active":""}"
+data-kit="${kitId}"
+data-type="${type}"
+data-value="${i}">
+⭐
+</span>
+`;
+
 }
+
 return html;
+
 }
 
 function bindActions(){
+
 document.querySelectorAll(".star").forEach(el=>{
-el.onclick=()=>{
-const user=document.getElementById("currentUser").value;
-const kitId=el.dataset.kit;
-const type=el.dataset.type;
-const value=Number(el.dataset.value);
-const v=getVote(user,kitId);
-v[type]=v[type]===value?0:value;
+
+el.onclick = ()=>{
+
+const user =
+document.getElementById("currentUser").value;
+
+const kitId = el.dataset.kit;
+
+const type = el.dataset.type;
+
+const value = Number(el.dataset.value);
+
+const v = getVote(user,kitId);
+
+v[type] = v[type] === value ? 0 : value;
+
 setDirty(user,kitId);
+
 render();
+
 };
+
 });
 
 document.querySelectorAll(".tag").forEach(el=>{
-el.onclick=()=>{
-const user=document.getElementById("currentUser").value;
-const kitId=el.dataset.kit;
-const type=el.dataset.type;
-const v=getVote(user,kitId);
-v[type]=!v[type];
+
+el.onclick = ()=>{
+
+const user =
+document.getElementById("currentUser").value;
+
+const kitId = el.dataset.kit;
+
+const type = el.dataset.type;
+
+const v = getVote(user,kitId);
+
+v[type] = !v[type];
+
 setDirty(user,kitId);
+
 render();
+
 };
+
 });
+
 }
 
 async function saveAll(){
-const keys=Object.keys(dirty);
-if(!keys.length){statusEl.textContent="Nada novo para salvar.";return}
-statusEl.textContent="Salvando avaliações...";
-for(const key of keys){
-await setDoc(doc(db,"votes",key),votes[key]);
+
+const keys = Object.keys(dirty);
+
+if(!keys.length){
+
+statusEl.textContent =
+"Nada novo para salvar.";
+
+return;
+
 }
-dirty={};
-statusEl.textContent="Avaliações salvas com sucesso.";
+
+statusEl.textContent =
+"Salvando avaliações...";
+
+for(const key of keys){
+
+await setDoc(
+doc(db,"votes",key),
+votes[key]
+);
+
+}
+
+dirty = {};
+
+statusEl.textContent =
+"Avaliações salvas com sucesso.";
+
 renderRankings();
+
 }
 
 async function clearCurrentUserVotes(){
-const user = document.getElementById("currentUser").value;
-const label = user === "lindo" ? "Lindo" : "Linda";
 
-const confirmDelete = confirm(`Tem certeza que deseja apagar todas as avaliações do perfil ${label}?`);
+const user =
+document.getElementById("currentUser").value;
+
+const label =
+user === "lindo" ? "Lindo":"Linda";
+
+const confirmDelete =
+confirm(`Apagar todas as avaliações do perfil ${label}?`);
+
 if(!confirmDelete) return;
 
-statusEl.textContent = `Apagando avaliações do perfil ${label}...`;
+statusEl.textContent =
+`Apagando avaliações do perfil ${label}...`;
 
 for(const team of teams){
+
 for(const kit of team.kits){
+
 const key = `${user}_${kit.id}`;
+
 votes[key] = emptyVote();
+
 delete dirty[key];
+
 await deleteDoc(doc(db,"votes",key));
-}
+
 }
 
-statusEl.textContent = `Avaliações do perfil ${label} apagadas.`;
+}
+
+statusEl.textContent =
+`Avaliações do perfil ${label} apagadas.`;
+
 render();
-}
 
-async function loadImages(){
-statusEl.textContent="Buscando imagens no guia...";
-for(const proxy of PROXIES){
-try{
-const html=await fetch(proxy).then(r=>r.text());
-if(!html || html.length<1000) continue;
-
-teams.forEach((team,idx)=>{
-const start=html.search(new RegExp(`<h3[^>]*>\\s*${escapeReg(team.name)}\\s*<\\/h3>`,"i"));
-if(start<0) return;
-
-let end=html.length;
-for(let j=idx+1;j<teams.length;j++){
-const next=html.search(new RegExp(`<h3[^>]*>\\s*${escapeReg(teams[j].name)}\\s*<\\/h3>`,"i"));
-if(next>start){end=next;break}
-}
-
-const block=html.slice(start,end);
-const imgs=[...block.matchAll(/https?:\/\/assets-mantosdofutebol[^"'\s<>]+?\.(?:jpg|jpeg|png|webp)/gi)]
-.map(m=>m[0].replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,""))
-.filter((v,i,a)=>a.indexOf(v)===i);
-
-imgs.slice(0,3).forEach((src,i)=>teams[idx].kits[i].image=src);
-});
-
-localStorage.setItem("teamsImages",JSON.stringify(teams.map(t=>t.kits.map(k=>k.image))));
-statusEl.textContent="Imagens atualizadas. Camisas sem imagem continuam pretas.";
-render();
-return;
-}catch(e){}
-}
-statusEl.textContent="Não consegui puxar as imagens automaticamente. Vamos preencher por links diretos se necessário.";
-}
-
-function escapeReg(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
-
-function restoreImages(){
-const saved=localStorage.getItem("teamsImages");
-if(!saved) return false;
-const imgs=JSON.parse(saved);
-teams.forEach((t,i)=>t.kits.forEach((k,j)=>k.image=imgs[i]?.[j]||null));
-return true;
 }
 
 function renderRankings(){
+
 ["lindo","linda"].forEach(user=>{
-const data=[];
-teams.forEach(team=>team.kits.forEach(kit=>{
-const v=getVote(user,kit.id);
-data.push({title:kit.title,total:(v.beauty||0)+(v.use||0),beauty:v.beauty||0,use:v.use||0,sair:v.sair,treino:v.treino});
-}));
-rank(`ranking-geral-${user}`,[...data].sort((a,b)=>b.total-a.total),"total");
-rank(`ranking-bonita-${user}`,[...data].sort((a,b)=>b.beauty-a.beauty),"beauty");
-rank(`ranking-uso-${user}`,[...data].sort((a,b)=>b.use-a.use),"use");
+
+const data = [];
+
+teams.forEach(team=>{
+
+team.kits.forEach(kit=>{
+
+const v = getVote(user,kit.id);
+
+data.push({
+title:kit.title,
+total:(v.beauty||0)+(v.use||0),
+beauty:v.beauty||0,
+use:v.use||0,
+sair:v.sair,
+treino:v.treino
 });
+
+});
+
+});
+
+rank(
+`ranking-geral-${user}`,
+[...data].sort((a,b)=>b.total-a.total),
+"total"
+);
+
+rank(
+`ranking-bonita-${user}`,
+[...data].sort((a,b)=>b.beauty-a.beauty),
+"beauty"
+);
+
+rank(
+`ranking-uso-${user}`,
+[...data].sort((a,b)=>b.use-a.use),
+"use"
+);
+
+});
+
 }
 
 function rank(id,data,key){
-const el=document.getElementById(id);
-el.innerHTML="";
-data.filter(x=>x[key]>0).forEach((x,i)=>{
-el.innerHTML+=`
+
+const el = document.getElementById(id);
+
+el.innerHTML = "";
+
+data
+.filter(x=>x[key]>0)
+.forEach((x,i)=>{
+
+el.innerHTML += `
 <div class="ranking-item">
-<div><strong>${i+1}. ${x.title}</strong><br>
-${x.sair?'<span class="badge">Sair</span>':''}
-${x.treino?'<span class="badge">Jogar/Treinar</span>':''}
-</div>
-<div>⭐ ${x[key]}</div>
-</div>`;
-});
-if(!el.innerHTML) el.innerHTML='<div class="small">Ainda sem votos.</div>';
+
+<div>
+
+<strong>
+${i+1}. ${x.title}
+</strong>
+
+<br>
+
+${x.sair
+? '<span class="badge">Sair</span>'
+: ''
 }
 
-document.getElementById("saveBtn").onclick=saveAll;
-document.getElementById("clearBtn").onclick=clearCurrentUserVotes;
-document.getElementById("imageBtn").onclick=loadImages;
-document.getElementById("goRankingBtn").onclick=()=>{
-document.getElementById("rankings").scrollIntoView({behavior:"smooth",block:"start"});
+${x.treino
+? '<span class="badge">Jogar/Treinar</span>'
+: ''
+}
+
+</div>
+
+<div>
+⭐ ${x[key]}
+</div>
+
+</div>
+`;
+
+});
+
+if(!el.innerHTML){
+
+el.innerHTML =
+'<div class="small">Ainda sem votos.</div>';
+
+}
+
+}
+
+document.getElementById("saveBtn").onclick =
+saveAll;
+
+document.getElementById("clearBtn").onclick =
+clearCurrentUserVotes;
+
+document.getElementById("goRankingBtn").onclick =
+()=>{
+
+document
+.getElementById("rankings")
+.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
 };
-document.getElementById("currentUser").onchange=render;
+
+document.getElementById("currentUser").onchange =
+render;
 
 setupTeamJump();
 
 await loadAllVotes();
-if(!restoreImages()) await loadImages();
-statusEl.textContent="Pronto. Vote e depois clique em Salvar avaliações.";
+
+statusEl.textContent =
+"Pronto. Vote e depois clique em Salvar avaliações.";
+
 render();
+
 </script>
+
 </body>
 </html>
