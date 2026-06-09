@@ -87,6 +87,33 @@ box-shadow:0 12px 30px rgba(0,0,0,.25);
 .badge{display:inline-block;font-size:11px;padding:4px 8px;border-radius:999px;margin-top:6px;margin-right:6px;background:#2b2b3b}
 .small{color:var(--muted);font-size:13px}
 
+#backToTopBtn{
+position:fixed;
+right:14px;
+bottom:18px;
+width:42px;
+height:42px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.18);
+background:rgba(20,20,30,.62);
+color:white;
+font-size:24px;
+font-weight:800;
+z-index:80;
+backdrop-filter:blur(8px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:0;
+box-shadow:0 8px 24px rgba(0,0,0,.25);
+}
+
+#backToTopBtn:hover{
+background:rgba(245,197,66,.85);
+color:#111;
+}
+
+
 @media(max-width:700px){
 body{padding:10px}
 .topbar{
@@ -257,7 +284,7 @@ Lindo vs Linda • Uniformes da Copa do Mundo 2026
 </div>
 
 <div id="teams"></div>
-
+<button id="backToTopBtn" title="Voltar ao topo">↑</button>
 <section class="rankings" id="rankings">
 <h2>Rankings</h2>
 
@@ -707,6 +734,19 @@ document.getElementById("rankings").scrollIntoView({behavior:"smooth",block:"sta
 };
 
 document.getElementById("currentUser").onchange = render;
+
+const backToTopBtn = document.getElementById("backToTopBtn");
+
+window.addEventListener("scroll",()=>{
+backToTopBtn.style.display = window.scrollY > 500 ? "flex" : "none";
+});
+
+backToTopBtn.onclick = ()=>{
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+};
 
 setupTeamJump();
 
