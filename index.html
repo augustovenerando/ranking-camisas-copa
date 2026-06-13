@@ -6,48 +6,17 @@
 <title>Ranking Camisas Copa 2026</title>
 
 <style>
-:root{
---bg:#0b0b12;--card:#161621;--text:#fff;--muted:#bbbbcc;
---blue:#4f6bff;--purple:#9b6dff;--green:#c5ff00;--gold:#f5c542;
-}
+:root{--bg:#0b0b12;--text:#fff;--muted:#bbbbcc;--blue:#4f6bff;--purple:#9b6dff;--green:#c5ff00;--gold:#f5c542}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-font-family:Arial,sans-serif;
-background:
-radial-gradient(circle at top left, rgba(255,77,77,.16), transparent 24%),
-radial-gradient(circle at top right, rgba(79,107,255,.16), transparent 24%),
-linear-gradient(135deg,#0b0b12,#12121b 60%,#171725);
-color:var(--text);
-padding:18px;
-min-height:100vh;
-}
-.topbar{
-position:sticky;
-top:0;
-z-index:100;
-background:rgba(12,12,18,.94);
-backdrop-filter:blur(14px);
-border:1px solid rgba(255,255,255,.06);
-border-radius:24px;
-padding:18px;
-margin-bottom:24px;
-box-shadow:0 10px 40px rgba(0,0,0,.35);
-}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at top left,rgba(255,77,77,.16),transparent 24%),radial-gradient(circle at top right,rgba(79,107,255,.16),transparent 24%),linear-gradient(135deg,#0b0b12,#12121b 60%,#171725);color:var(--text);padding:18px;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(12,12,18,.94);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:18px;margin-bottom:24px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
 .header-title{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:8px}
 .header-title img{width:58px;height:auto;object-fit:contain}
 h1{font-size:32px;font-weight:800}
 .subtitle{text-align:center;color:var(--muted);margin-bottom:16px;font-size:14px}
 .controls{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
-select,button{
-padding:12px 16px;
-border-radius:14px;
-border:1px solid rgba(255,255,255,.08);
-background:#1d1d29;
-color:white;
-font-weight:700;
-font-size:14px;
-}
+select,button{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:#1d1d29;color:white;font-weight:700;font-size:14px}
 button{cursor:pointer;transition:.2s}
 button:hover{transform:translateY(-1px);opacity:.92}
 #imageBtn{background:linear-gradient(135deg,var(--blue),#6d83ff)}
@@ -59,132 +28,31 @@ button:hover{transform:translateY(-1px);opacity:.92}
 .team h2{display:flex;align-items:center;gap:12px;font-size:30px;margin-bottom:18px;padding-left:12px;border-left:6px solid var(--gold)}
 .flag{width:34px;height:24px;object-fit:cover;border-radius:4px;box-shadow:0 0 0 1px rgba(255,255,255,.18);background:#222}
 .kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.card{
-background:linear-gradient(180deg,#1a1a26,#141420);
-border:1px solid rgba(255,255,255,.08);
-border-radius:24px;
-overflow:hidden;
-box-shadow:0 12px 30px rgba(0,0,0,.25);
-}
-.imgbox{
-height:320px;
-background:linear-gradient(135deg,rgba(255,77,77,.15),rgba(79,107,255,.12),rgba(197,255,0,.08));
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-}
+.card{background:linear-gradient(180deg,#1a1a26,#141420);border:1px solid rgba(255,255,255,.08);border-radius:24px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.imgbox{height:320px;background:linear-gradient(135deg,rgba(255,77,77,.15),rgba(79,107,255,.12),rgba(197,255,0,.08));display:flex;align-items:center;justify-content:center;padding:20px}
 .imgbox img{width:100%;height:100%;object-fit:contain;background:white;border-radius:12px;padding:10px}
 .content{padding:18px}
 .kit-title{font-size:22px;font-weight:800;margin-bottom:16px}
 .question{margin:18px 0}
 .question p{margin-bottom:10px;color:#e7e7f0;font-weight:600}
-.star{
-font-size:28px;
-cursor:pointer;
-filter:grayscale(1);
-opacity:.28;
-transition:transform .18s ease, opacity .18s ease, filter .18s ease;
-display:inline-block;
-}
+.star{font-size:28px;cursor:pointer;filter:grayscale(1);opacity:.28;transition:transform .18s ease,opacity .18s ease,filter .18s ease;display:inline-block}
 .star:hover{transform:scale(1.18) rotate(-4deg)}
 .star.active{filter:none;opacity:1;animation:starPop .22s ease}
-@keyframes starPop{
-0%{transform:scale(.85)}
-60%{transform:scale(1.22)}
-100%{transform:scale(1)}
-}
-.tag{
-display:inline-block;
-padding:9px 14px;
-border-radius:999px;
-border:1px solid rgba(255,255,255,.1);
-margin-right:8px;
-margin-top:6px;
-cursor:pointer;
-background:#20202e;
-}
+@keyframes starPop{0%{transform:scale(.85)}60%{transform:scale(1.22)}100%{transform:scale(1)}}
+.tag{display:inline-block;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);margin-right:8px;margin-top:6px;cursor:pointer;background:#20202e}
 .tag.active{background:linear-gradient(135deg,var(--gold),#ffd95c);color:black;font-weight:800;border-color:transparent}
 .rankings{margin-top:50px;scroll-margin-top:170px}
 .rankings h2{font-size:34px;margin-bottom:22px}
 .ranking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.ranking-box{
-background:linear-gradient(180deg,#1a1a26,#141420);
-border:1px solid rgba(255,255,255,.08);
-border-radius:24px;
-padding:18px;
-box-shadow:0 12px 30px rgba(0,0,0,.25);
-}
+.ranking-box{background:linear-gradient(180deg,#1a1a26,#141420);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
 .ranking-box h3{margin-bottom:16px;font-size:22px}
 .ranking-item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .badge{display:inline-block;font-size:11px;padding:4px 8px;border-radius:999px;margin-top:6px;margin-right:6px;background:#2b2b3b}
 .small{color:var(--muted);font-size:13px}
-
-#backToTopBtn{
-position:fixed;
-right:14px;
-bottom:18px;
-width:42px;
-height:42px;
-border-radius:50%;
-border:1px solid rgba(255,255,255,.18);
-background:rgba(20,20,30,.62);
-color:white;
-font-size:24px;
-font-weight:800;
-z-index:80;
-backdrop-filter:blur(8px);
-display:none;
-align-items:center;
-justify-content:center;
-padding:0;
-box-shadow:0 8px 24px rgba(0,0,0,.25);
-}
+#backToTopBtn{position:fixed;right:14px;bottom:18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(20,20,30,.62);color:white;font-size:24px;font-weight:800;z-index:80;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:0;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 #backToTopBtn:hover{background:rgba(245,197,66,.85);color:#111}
-
 @media(max-width:700px){
-body{padding:10px}
-.topbar{position:relative;top:auto;border-radius:18px;padding:12px;margin-bottom:18px}
-.header-title{gap:8px;margin-bottom:6px}
-.header-title img{width:42px}
-h1{font-size:20px;line-height:1.15}
-.subtitle{font-size:12px;margin-bottom:10px}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
-.controls select,.controls button{
-width:100%;
-height:54px;
-padding:0 10px;
-font-size:13px;
-line-height:1.15;
-text-align:center;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:14px;
-}
-#currentUser,#teamJump{height:54px;grid-column:span 1}
-#clearBtn{grid-column:1 / -1}
-#saveBtn{grid-column:1 / -1;height:56px}
-.status{font-size:12px;line-height:1.3;margin-top:8px}
-.team{margin:28px 0;scroll-margin-top:20px}
-.team h2{font-size:22px;margin-bottom:12px}
-.flag{width:30px;height:21px}
-.kits{grid-template-columns:1fr;gap:14px}
-.card{border-radius:18px}
-.imgbox{height:245px;padding:12px}
-.content{padding:14px}
-.kit-title{font-size:19px;margin-bottom:10px}
-.question{margin:14px 0}
-.star{font-size:25px}
-.tag{font-size:13px;padding:8px 11px}
-.rankings{margin-top:34px;scroll-margin-top:20px}
-.rankings h2{font-size:26px}
-.ranking-grid{grid-template-columns:1fr 1fr;gap:10px}
-.ranking-box{min-width:0}
-.ranking-box h3{font-size:15px;line-height:1.25}
-.ranking-item{font-size:12px;gap:6px}
-.badge{font-size:9px;padding:3px 6px}
-.ranking-item strong{font-size:12px}
+body{padding:10px}.topbar{position:relative;top:auto;border-radius:18px;padding:12px;margin-bottom:18px}.header-title{gap:8px;margin-bottom:6px}.header-title img{width:42px}h1{font-size:20px;line-height:1.15}.subtitle{font-size:12px;margin-bottom:10px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}.controls select,.controls button{width:100%;height:54px;padding:0 10px;font-size:13px;line-height:1.15;text-align:center;display:flex;align-items:center;justify-content:center;border-radius:14px}#currentUser,#teamJump{height:54px;grid-column:span 1}#clearBtn{grid-column:1/-1}#saveBtn{grid-column:1/-1;height:56px}.status{font-size:12px;line-height:1.3;margin-top:8px}.team{margin:28px 0;scroll-margin-top:20px}.team h2{font-size:22px;margin-bottom:12px}.flag{width:30px;height:21px}.kits{grid-template-columns:1fr;gap:14px}.card{border-radius:18px}.imgbox{height:245px;padding:12px}.content{padding:14px}.kit-title{font-size:19px;margin-bottom:10px}.question{margin:14px 0}.star{font-size:25px}.tag{font-size:13px;padding:8px 11px}.rankings{margin-top:34px;scroll-margin-top:20px}.rankings h2{font-size:26px}.ranking-grid{grid-template-columns:1fr 1fr;gap:10px}.ranking-box{min-width:0}.ranking-box h3{font-size:15px;line-height:1.25}.ranking-item{font-size:12px;gap:6px}.badge{font-size:9px;padding:3px 6px}.ranking-item strong{font-size:12px}
 }
 </style>
 </head>
@@ -192,50 +60,44 @@ border-radius:14px;
 <body>
 
 <div class="topbar">
-<div class="header-title">
-<img
-src="https://commons.wikimedia.org/wiki/Special:Redirect/file/2026%20FIFA%20World%20Cup%20emblem%20(horizontal%2C%20with%20wordmark).svg"
-alt="FIFA World Cup 2026"
-onerror="this.style.display='none'"
->
-<h1>Ranking Camisas Copa 2026</h1>
-</div>
+  <div class="header-title">
+    <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/2026%20FIFA%20World%20Cup%20emblem%20(horizontal%2C%20with%20wordmark).svg" alt="FIFA World Cup 2026" onerror="this.style.display='none'">
+    <h1>Ranking Camisas Copa 2026</h1>
+  </div>
 
-<div class="subtitle">Lindo vs Linda • Uniformes da Copa do Mundo 2026!</div>
+  <div class="subtitle">Lindo vs Linda • Uniformes da Copa do Mundo 2026!</div>
 
-<div class="controls">
-<select id="currentUser">
-<option value="lindo">Lindo</option>
-<option value="linda">Linda</option>
-</select>
+  <div class="controls">
+    <select id="currentUser">
+      <option value="lindo">Lindo</option>
+      <option value="linda">Linda</option>
+    </select>
 
-<select id="teamJump">
-<option value="">Ir para seleção...</option>
-</select>
+    <select id="teamJump">
+      <option value="">Ir para seleção...</option>
+    </select>
 
-<button id="imageBtn">Atualizar imagens</button>
-<button id="goRankingBtn">Ir para ranking</button>
-<button id="clearBtn">Apagar avaliações</button>
-<button id="saveBtn">Salvar avaliações</button>
-</div>
+    <button id="imageBtn">Atualizar imagens</button>
+    <button id="goRankingBtn">Ir para ranking</button>
+    <button id="clearBtn">Apagar avaliações</button>
+    <button id="saveBtn">Salvar avaliações</button>
+  </div>
 
-<div id="status" class="status">Carregando...</div>
+  <div id="status" class="status">Carregando...</div>
 </div>
 
 <div id="teams"></div>
-
 <button id="backToTopBtn" title="Voltar ao topo">↑</button>
 
 <section class="rankings" id="rankings">
 <h2>Rankings</h2>
-
 <div class="ranking-grid">
-<div class="ranking-box"><h3>Geral — Lindo</h3><div id="ranking-geral-lindo"></div></div>
-<div class="ranking-box"><h3>Geral — Linda</h3><div id="ranking-geral-linda"></div></div>
-<div class="ranking-box"><h3>Bonita — Lindo</h3><div id="ranking-bonita-lindo"></div></div>
-<div class="ranking-box"><h3>Bonita — Linda</h3><div id="ranking-bonita-linda"></div></div>
-<div class="ranking-box"><h3>Usaria depois — Lindo</h3><div id="ranking-uso-lindo"></div></div>
-<div class="ranking-box"><h3>Usaria depois — Linda</h3><div id="ranking-uso-linda"></div></div>
+  <div class="ranking-box"><h3>Geral — Lindo</h3><div id="ranking-geral-lindo"></div></div>
+  <div class="ranking-box"><h3>Geral — Linda</h3><div id="ranking-geral-linda"></div></div>
+  <div class="ranking-box"><h3>Bonita — Lindo</h3><div id="ranking-bonita-lindo"></div></div>
+  <div class="ranking-box"><h3>Bonita — Linda</h3><div id="ranking-bonita-linda"></div></div>
+  <div class="ranking-box"><h3>Usaria depois — Lindo</h3><div id="ranking-uso-lindo"></div></div>
+  <div class="ranking-box"><h3>Usaria depois — Linda</h3><div id="ranking-uso-linda"></div></div>
 </div>
 </section>
 
@@ -255,27 +117,8 @@ appId:"1:909673035671:web:eeb3ba06a51374f6d8f6d2"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const GUIDE = "https://mantosdofutebol.com.br/2026/06/camisas-copa-do-mundo-2026/";
-
-const DATA_SOURCES = [
-"https://r.jina.ai/" + GUIDE,
-"https://api.allorigins.win/raw?url=" + encodeURIComponent(GUIDE),
-"https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(GUIDE)
-];
-
 const countryCodes = {
-"México":"mx","África do Sul":"za","Coréia do Sul":"kr","República Tcheca":"cz",
-"Canadá":"ca","Bósnia-Herzegovina":"ba","Catar":"qa","Suíça":"ch",
-"Brasil":"br","Marrocos":"ma","Haiti":"ht","Escócia":"gb-sct",
-"Estados Unidos":"us","Paraguai":"py","Austrália":"au","Turquia":"tr",
-"Alemanha":"de","Curaçao":"cw","Costa do Marfim":"ci","Equador":"ec",
-"Holanda":"nl","Japão":"jp","Suécia":"se","Tunísia":"tn",
-"Bélgica":"be","Egito":"eg","Irã":"ir","Nova Zelândia":"nz",
-"Espanha":"es","Cabo Verde":"cv","Arábia Saudita":"sa","Uruguai":"uy",
-"França":"fr","Senegal":"sn","Iraque":"iq","Noruega":"no",
-"Argentina":"ar","Argélia":"dz","Áustria":"at","Jordânia":"jo",
-"Portugal":"pt","RD Congo":"cd","Uzbequistão":"uz","Colômbia":"co",
-"Inglaterra":"gb-eng","Croácia":"hr","Gana":"gh","Panamá":"pa"
+"México":"mx","África do Sul":"za","Coréia do Sul":"kr","República Tcheca":"cz","Canadá":"ca","Bósnia-Herzegovina":"ba","Catar":"qa","Suíça":"ch","Brasil":"br","Marrocos":"ma","Haiti":"ht","Escócia":"gb-sct","Estados Unidos":"us","Paraguai":"py","Austrália":"au","Turquia":"tr","Alemanha":"de","Curaçao":"cw","Costa do Marfim":"ci","Equador":"ec","Holanda":"nl","Japão":"jp","Suécia":"se","Tunísia":"tn","Bélgica":"be","Egito":"eg","Irã":"ir","Nova Zelândia":"nz","Espanha":"es","Cabo Verde":"cv","Arábia Saudita":"sa","Uruguai":"uy","França":"fr","Senegal":"sn","Iraque":"iq","Noruega":"no","Argentina":"ar","Argélia":"dz","Áustria":"at","Jordânia":"jo","Portugal":"pt","RD Congo":"cd","Uzbequistão":"uz","Colômbia":"co","Inglaterra":"gb-eng","Croácia":"hr","Gana":"gh","Panamá":"pa"
 };
 
 const teamNames = [
@@ -293,12 +136,61 @@ const teamNames = [
 "Inglaterra","Croácia","Gana","Panamá"
 ];
 
+const SHIRTS = {
+"México":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05145132/Camisa-titular-do-Mexico-2026-2027-adidas-kit-2.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/01/06200931/Mexico-Away-kit.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/09102810/Terceira-camisa-do-Mexico-para-a-Copa-2026-vaza-3.jpg"},
+"África do Sul":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/06/02225412/Camisa-titular-da-Africa-do-Sul-Copa-2026-adidas.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/20103116/Camisa-reserva-da-Africa-do-Sul-Copa-2026-adidas-3-640x640.jpg"},
+"Coréia do Sul":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/05215136/Camisa-titular-da-Coreia-do-Sul-2026-2027-Nike-1-640x640.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/18155054/Camisa-reserva-da-Coreia-do-Sul-Copa-2026-Nike-1-1.jpg"},
+"República Tcheca":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/12/03092610/Camisa-titular-da-Tchequia-2026-2027-PUMA-kit-3.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/23141917/Camisa-reserva-da-Republica-Tcheca-2026-2027-PUMA-2.jpg"},
+"Canadá":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/16104948/Camisa-titular-do-Canada-Copa-2026-Nike-Home-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/16104942/Camisa-reserva-do-Canada-Copa-2026-Nike-Away-kit-1.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/14142934/Canada-Away-kit.jpg"},
+"Bósnia-Herzegovina":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/25100418/Camisas-da-Bosnia-Herzegovina-2026-2026-Kelme-Home-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/25100423/Camisas-da-Bosnia-Herzegovina-2026-2026-Kelme-Away-kit-1.jpg"},
+"Catar":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05213243/Camisa-titular-do-Catar-2026-2027-adidas-1-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/20110610/Camisa-reserva-catar-copa-2026-adidas-5-640x640.jpg"},
+"Suíça":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/12/03085723/Camisa-titular-da-Suica-2026-2027-PUMA-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19205453/Camisa-reserva-da-Suica-Copa-2026-PUMA-2.jpg"},
+"Brasil":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/14182543/2026-brasil-home.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/13091931/Camisa-azul-do-Brasil-Copa-2026-Jordan-1-2.jpg"},
+"Marrocos":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19210738/Camisa-titular-do-Marrocos-Copa-2026-PUMA-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19210725/Camisa-reserva-do-Marrocos-Copa-2026-PUMA-kit-1.jpg"},
+"Haiti":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/30101246/Saeta-lanca-camisas-do-Haiti-para-a-Copa-do-Mundo-2026-9.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/30101235/Saeta-lanca-camisas-do-Haiti-para-a-Copa-do-Mundo-2026-5.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/30101254/Saeta-lanca-camisas-do-Haiti-para-a-Copa-do-Mundo-2026-12.jpg"},
+"Escócia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/11/05194330/Camisa-titular-da-Escocia-2026-2027-adidas-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/09111841/Camisa-reserva-da-escocia-2026-adidas-2-640x640.jpg"},
+"Estados Unidos":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/02/16100548/Camisa-titular-dos-Estados-Unidos-Copa-2026-Nike-Home-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/02/16100550/Camisa-reserva-dos-Estados-Unidos-Copa-2026-Nike-Away-kit-1.jpg"},
+"Paraguai":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/20155617/Camisa-titular-do-Paraguai-Copa-2026-PUMA-2.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19231414/Camisa-reserva-do-Paraguai-Copa-2026-PUMA-2.jpg"},
+"Austrália":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/14204020/Camisa-titular-da-Australia-2026-2027-Nike-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/14204033/Camisa-reserva-da-Australia-2026-2027-Nike-1.jpg"},
+"Turquia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/15133512/Camisa-titular-da-Turquia-2026-2027-Nike-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/15133518/Camisa-reserva-da-Turquia-2026-2027-Nike-1.jpg"},
+"Alemanha":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05143119/Camisa-titular-da-Alemanha-2026-adidas-1-2.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/09/05160639/Alemanha-Away-kit-640x640.jpg"},
+"Curaçao":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/21150152/Camisa-titular-de-Curacao-2026-2027-adidas-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/15144526/Camisa-reserva-do-Curacao-2026-2027-adidas-1-640x640.jpg"},
+"Costa do Marfim":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19222529/Camisa-titular-da-Costa-do-Marfim-Copa-2026-PUMA-2.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19222515/Camisa-reserva-da-Costa-do-Marfim-Copa-2026-PUMA-2.jpg"},
+"Equador":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/02/25225242/Camisa-titular-do-Equador-Copa-2026-Marathon-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/02/25225256/Camisa-reserva-do-Equador-Copa-2026-Marathon-1.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/02/25225309/Terceira-camisa-do-Equador-Copa-2026-Marathon-1.jpg"},
+"Holanda":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/15145503/Camisa-titular-da-Holanda-2026-2027-Nike-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/15145456/Camisa-reserva-da-Holanda-2026-2027-Nike-1.jpg"},
+"Japão":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/15150158/Camisa-titular-do-Japao-2026-2027-adidas-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/09/05195022/Japao-Away-kit-640x640.jpg"},
+"Suécia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/11/05174332/Camisa-titular-da-Suecia-2026-2027-adidas-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/20130958/camisa-reserva-suecia-copa-2026-adidas-5-640x640.jpg"},
+"Tunísia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/28100110/Tunisia-Home-Kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/28100107/Tunisia-Away-Kit-1.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/28100104/Tunisia-Third-Kit-1.jpg"},
+"Bélgica":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05160146/Camisa-titular-da-Belgica-2026-2027-adidas-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/02/05201157/Belgica-Away-kit-640x640.jpg"},
+"Egito":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19225553/Camisa-titular-do-Egito-Copa-2026-PUMA-2.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19225540/Camisa-reserva-do-Egito-Copa-2026-PUMA-2.jpg"},
+"Irã":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/24110407/Camisa-titular-do-Ira-Copa-do-Mundo-2026-Majid-4.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/24110424/Camisa-reserva-do-Ira-Copa-do-Mundo-2026-Majid.jpg"},
+"Nova Zelândia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/23144730/Camisa-titular-da-Nova-Zelandia-Copa-2026-PUMA-2.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/23144703/Camisa-reserva-da-Nova-Zelandia-Copa-2026-PUMA-2.jpg"},
+"Espanha":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05141327/Camisa-titular-da-Espanha-2026-2027-adidas-6.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05163903/Espanha-Away-Kit-640x640.jpg"},
+"Cabo Verde":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/22171004/Camisa-titular-do-Cabo-Verde-2026-2027-Capelli-Sport-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/22170958/Camisa-reserva-do-Cabo-Verde-2026-2027-Capelli-Sport-1.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/06/03185337/Cabo-Verde-Third-Kit.jpg"},
+"Arábia Saudita":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/11/05170242/Camisa-titular-da-Arabia-Saudita-para-a-Copa-do-Mundo-2026-e-lancada-pela-adidas-5.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/09112705/Camisa-reserva-arabia-saudita-2026-adidas-2-640x640.jpg"},
+"Uruguai":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/15152711/Camisa-titular-do-Uruguai-2026-2027-Nike-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/15152704/Camisa-reserva-do-Uruguai-2026-2027-Nike-1.jpg"},
+"França":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/23072554/Camisa-titular-da-Franca-Copa-2026-Nike-Home-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/23072558/Camisa-reserva-da-Franca-Copa-2026-Nike-Away-kit-1.jpg"},
+"Senegal":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19220202/Camisa-titular-do-Senegal-Copa-2026-PUMA-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19220147/Camisa-reserva-do-Senegal-Copa-2026-PUMA-kit-1.jpg"},
+"Iraque":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/22130353/Camisa-titular-do-Iraque-Copa-2026-JAKO-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/22130346/Camisa-reserva-do-Iraque-Copa-2026-JAKO-1.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/22171646/Camisa-tres-do-Iraque-Copa-2026-JAKO-2.jpg"},
+"Noruega":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/15154315/Camisa-titular-da-Noruega-2026-2027-Nike-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/15154321/Camisa-reserva-da-Noruega-2026-2027-Nike-1.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/15154326/Camisa-tres-da-Noruega-2026-2027-Nike-1-640x640.jpg"},
+"Argentina":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/11/05135855/Camisa-titular-da-Argentina-2026-2027-adidas-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/06193132/Argentina-Away-kit-1-640x640.jpg"},
+"Argélia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/04/15201716/Camisa-titular-da-Argelia-2026-2027-adidas-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/20101628/Camisa-reserva-da-argelia-copa-2026-adidas-4-640x640.jpg"},
+"Áustria":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/12/03084029/Camisa-titular-da-Austria-2026-2027-PUMA-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19204205/Camisa-reserva-da-Austria-Copa-2026-PUMA-2.jpg"},
+"Jordânia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/18165644/camisas-jordania-copa-do-mundo-2026-kelme-3.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/18165641/camisas-jordania-copa-do-mundo-2026-kelme-2.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/18165647/camisas-jordania-copa-do-mundo-2026-kelme-4.jpg"},
+"Portugal":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/12/03075315/Camisa-titular-de-Portugal-2026-2027-PUMA-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/19195624/Camisa-reserva-de-Portugal-Copa-2026-PUMA-1-2.jpg"},
+"RD Congo":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/25102342/camisas-rd-congo-2026-2027-umbro-6.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/25102335/camisas-rd-congo-2026-2027-umbro-4.jpg",3:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/25102327/camisas-rd-congo-2026-2027-umbro-2.jpg"},
+"Uzbequistão":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/26205110/Camisa-azul-do-Uzbequistao-2026-2027-7Saber.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/05/26205112/Camisa-branca-do-Uzbequistao-2026-2027-7Saber.jpg"},
+"Colômbia":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2025/10/05172619/Camisa-titular-da-Colombia-2026-2027-adidas-kit-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/20090710/Camisa-reserva-da-Colombia-Copa-2026-adidas-kit-640x640.jpg"},
+"Inglaterra":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/24180817/camisa-titular-da-Inglaterra-Copa-2026-Nike-1.jpg",2:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/03/23122232/Camisa-reserva-da-Inglaterra-Copa-2026-Nike-Away-kit-1.jpg"},
+"Panamá":{1:"https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2026/06/02223326/Panama-Home-kit.jpg"}
+};
+
 const teams = teamNames.map(name=>({
 name,
 kits:[1,2,3].map(n=>({
 id:slug(name)+n,
 title:`${name} ${n}`,
-image:null
+image:SHIRTS[name]?.[n] || null
 }))
 }));
 
@@ -306,187 +198,130 @@ let votes = {};
 let dirty = {};
 const statusEl = document.getElementById("status");
 
-function flagUrl(name){
-const code = countryCodes[name];
-return code ? `https://flagcdn.com/w80/${code}.png` : "";
-}
-
-function slug(t){
-return t.toLowerCase()
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"")
-.replace(/[^a-z0-9]+/g,"-")
-.replace(/(^-|-$)/g,"");
-}
-
-function normalize(t){
-return t.toLowerCase()
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"")
-.replace(/[^a-z0-9]/g,"");
-}
-
-function emptyVote(){
-return {beauty:0,use:0,sair:false,treino:false};
-}
-
-function medal(index){
-if(index === 0) return "🥇";
-if(index === 1) return "🥈";
-if(index === 2) return "🥉";
-return "";
-}
+function slug(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"")}
+function flagUrl(name){const code=countryCodes[name];return code?`https://flagcdn.com/w80/${code}.png`:""}
+function emptyVote(){return {beauty:0,use:0,sair:false,treino:false}}
+function medal(i){return i===0?"🥇":i===1?"🥈":i===2?"🥉":""}
 
 async function loadAllVotes(){
 for(const user of ["lindo","linda"]){
 for(const team of teams){
 for(const kit of team.kits){
-const id = `${user}_${kit.id}`;
-const snap = await getDoc(doc(db,"votes",id));
-votes[id] = snap.exists() ? snap.data() : emptyVote();
+const id=`${user}_${kit.id}`;
+const snap=await getDoc(doc(db,"votes",id));
+votes[id]=snap.exists()?snap.data():emptyVote();
 }
 }
 }
 }
 
 function getVote(user,kitId){
-const id = `${user}_${kitId}`;
-if(!votes[id]) votes[id] = emptyVote();
+const id=`${user}_${kitId}`;
+if(!votes[id]) votes[id]=emptyVote();
 return votes[id];
 }
 
 function setDirty(user,kitId){
-dirty[`${user}_${kitId}`] = true;
-statusEl.textContent = "Você tem alterações não salvas.";
+dirty[`${user}_${kitId}`]=true;
+statusEl.textContent="Você tem alterações não salvas.";
 }
 
 function setupTeamJump(){
-const teamJump = document.getElementById("teamJump");
-teamJump.innerHTML = `<option value="">Ir para seleção...</option>`;
-
-teamNames.forEach(name=>{
-const option = document.createElement("option");
-option.value = "team-" + slug(name);
-option.textContent = name;
+const teamJump=document.getElementById("teamJump");
+teamJump.innerHTML=`<option value="">Ir para seleção...</option>`;
+teams.filter(t=>t.kits.some(k=>k.image)).forEach(team=>{
+const option=document.createElement("option");
+option.value="team-"+slug(team.name);
+option.textContent=team.name;
 teamJump.appendChild(option);
 });
-
-teamJump.onchange = ()=>{
+teamJump.onchange=()=>{
 if(teamJump.value){
-const target = document.getElementById(teamJump.value);
+const target=document.getElementById(teamJump.value);
 if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
-teamJump.value = "";
+teamJump.value="";
 }
 };
 }
 
 function render(){
-const container = document.getElementById("teams");
-const user = document.getElementById("currentUser").value;
-container.innerHTML = "";
+const container=document.getElementById("teams");
+const user=document.getElementById("currentUser").value;
+container.innerHTML="";
 
 teams.forEach(team=>{
-const visibleKits = team.kits.filter(kit => kit.image);
-
+const visibleKits=team.kits.filter(kit=>kit.image);
 if(!visibleKits.length) return;
 
-const div = document.createElement("div");
-div.className = "team";
-div.id = "team-" + slug(team.name);
-
-div.innerHTML = `
+const div=document.createElement("div");
+div.className="team";
+div.id="team-"+slug(team.name);
+div.innerHTML=`
 <h2>
 <img class="flag" src="${flagUrl(team.name)}" alt="Bandeira ${team.name}" loading="lazy" onerror="this.style.display='none'">
 <span>${team.name}</span>
 </h2>
 <div class="kits"></div>
 `;
-
-const kitsDiv = div.querySelector(".kits");
+const kitsDiv=div.querySelector(".kits");
 
 visibleKits.forEach(kit=>{
-const v = getVote(user,kit.id);
-const card = document.createElement("div");
-card.className = "card";
-
-card.innerHTML = `
+const v=getVote(user,kit.id);
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
 <div class="imgbox">
-<img
-src="${kit.image}"
-loading="lazy"
-decoding="async"
-onerror="this.closest('.card').remove()"
->
+<img src="${kit.image}" loading="lazy" decoding="async" onerror="this.closest('.card').remove()">
 </div>
-
 <div class="content">
 <div class="kit-title">${kit.title}</div>
-
-<div class="question">
-<p>Eu acho ela bonita?</p>
-<div>${stars(v.beauty,"beauty",kit.id)}</div>
-</div>
-
-<div class="question">
-<p>Eu usaria depois da Copa?</p>
-<div>${stars(v.use,"use",kit.id)}</div>
-</div>
-
+<div class="question"><p>Eu acho ela bonita?</p><div>${stars(v.beauty,"beauty",kit.id)}</div></div>
+<div class="question"><p>Eu usaria depois da Copa?</p><div>${stars(v.use,"use",kit.id)}</div></div>
 <div class="question">
 <p>Eu usaria para:</p>
-<span class="tag ${v.sair ? "active":""}" data-kit="${kit.id}" data-type="sair">Sair</span>
-<span class="tag ${v.treino ? "active":""}" data-kit="${kit.id}" data-type="treino">Jogar/Treinar</span>
+<span class="tag ${v.sair?"active":""}" data-kit="${kit.id}" data-type="sair">Sair</span>
+<span class="tag ${v.treino?"active":""}" data-kit="${kit.id}" data-type="treino">Jogar/Treinar</span>
 </div>
 </div>
 `;
-
 kitsDiv.appendChild(card);
 });
-
 container.appendChild(div);
 });
 
 bindActions();
 renderRankings();
-
-if(!container.children.length){
-statusEl.textContent = "Nenhuma imagem carregada. Clique em Atualizar imagens.";
-}
 }
 
 function stars(value,type,kitId){
-let html = "";
+let html="";
 for(let i=1;i<=5;i++){
-html += `<span class="star ${i<=value ? "active":""}" data-kit="${kitId}" data-type="${type}" data-value="${i}">★</span>`;
+html+=`<span class="star ${i<=value?"active":""}" data-kit="${kitId}" data-type="${type}" data-value="${i}">★</span>`;
 }
 return html;
 }
 
 function bindActions(){
 document.querySelectorAll(".star").forEach(el=>{
-el.onclick = ()=>{
-const user = document.getElementById("currentUser").value;
-const kitId = el.dataset.kit;
-const type = el.dataset.type;
-const value = Number(el.dataset.value);
-const v = getVote(user,kitId);
-
-v[type] = v[type] === value ? 0 : value;
-
+el.onclick=()=>{
+const user=document.getElementById("currentUser").value;
+const kitId=el.dataset.kit;
+const type=el.dataset.type;
+const value=Number(el.dataset.value);
+const v=getVote(user,kitId);
+v[type]=v[type]===value?0:value;
 setDirty(user,kitId);
 render();
 };
 });
 
 document.querySelectorAll(".tag").forEach(el=>{
-el.onclick = ()=>{
-const user = document.getElementById("currentUser").value;
-const kitId = el.dataset.kit;
-const type = el.dataset.type;
-const v = getVote(user,kitId);
-
-v[type] = !v[type];
-
+el.onclick=()=>{
+const user=document.getElementById("currentUser").value;
+const kitId=el.dataset.kit;
+const type=el.dataset.type;
+const v=getVote(user,kitId);
+v[type]=!v[type];
 setDirty(user,kitId);
 render();
 };
@@ -494,197 +329,37 @@ render();
 }
 
 async function saveAll(){
-const keys = Object.keys(dirty);
-
-if(!keys.length){
-statusEl.textContent = "Nada novo para salvar.";
-return;
-}
-
-statusEl.textContent = "Salvando avaliações...";
-
-for(const key of keys){
-await setDoc(doc(db,"votes",key),votes[key]);
-}
-
-dirty = {};
-statusEl.textContent = "Avaliações salvas com sucesso.";
+const keys=Object.keys(dirty);
+if(!keys.length){statusEl.textContent="Nada novo para salvar.";return}
+statusEl.textContent="Salvando avaliações...";
+for(const key of keys){await setDoc(doc(db,"votes",key),votes[key])}
+dirty={};
+statusEl.textContent="Avaliações salvas com sucesso.";
 renderRankings();
 }
 
 async function clearCurrentUserVotes(){
-const user = document.getElementById("currentUser").value;
-const label = user === "lindo" ? "Lindo":"Linda";
-const confirmDelete = confirm(`Apagar todas as avaliações do perfil ${label}?`);
-
-if(!confirmDelete) return;
-
-statusEl.textContent = `Apagando avaliações do perfil ${label}...`;
-
+const user=document.getElementById("currentUser").value;
+const label=user==="lindo"?"Lindo":"Linda";
+if(!confirm(`Apagar todas as avaliações do perfil ${label}?`)) return;
+statusEl.textContent=`Apagando avaliações do perfil ${label}...`;
 for(const team of teams){
 for(const kit of team.kits){
-const key = `${user}_${kit.id}`;
-votes[key] = emptyVote();
+const key=`${user}_${kit.id}`;
+votes[key]=emptyVote();
 delete dirty[key];
 await deleteDoc(doc(db,"votes",key));
 }
 }
-
-statusEl.textContent = `Avaliações do perfil ${label} apagadas.`;
+statusEl.textContent=`Avaliações do perfil ${label} apagadas.`;
 render();
-}
-
-function getBlockForTeam(text, teamName, index){
-const patterns = [
-new RegExp(`###\\s+${escapeReg(teamName)}[\\s\\S]*?(?=\\n###\\s+|\\n##\\s+|$)`,"i"),
-new RegExp(`<h3[^>]*>\\s*${escapeReg(teamName)}\\s*<\\/h3>[\\s\\S]*?(?=<h3|<h2|$)`,"i")
-];
-
-for(const pattern of patterns){
-const match = text.match(pattern);
-if(match) return match[0];
-}
-
-const normalizedText = normalize(text);
-const normalizedTeam = normalize(teamName);
-const start = normalizedText.indexOf(normalizedTeam);
-
-if(start < 0) return "";
-
-let end = text.length;
-
-for(let j=index+1;j<teamNames.length;j++){
-const nextName = normalize(teamNames[j]);
-const next = normalizedText.indexOf(nextName,start + normalizedTeam.length);
-if(next > start){
-end = next;
-break;
-}
-}
-
-return text.slice(start,end);
-}
-
-function extractImagesFromBlock(block){
-const urls = [];
-
-const markdownImages = [...block.matchAll(/!\[[^\]]*?\]\((https?:\/\/[^)]+?\.(?:jpg|jpeg|png|webp)[^)]*)\)/gi)]
-.map(m=>m[1]);
-
-const directUrls = [...block.matchAll(/https?:\/\/[^"'\s<>)]+?\.(?:jpg|jpeg|png|webp)(?:\?[^"'\s<>)]+)?/gi)]
-.map(m=>m[0]);
-
-const attrs = [...block.matchAll(/(?:src|data-src|data-lazy-src|href)=["']([^"']+\.(?:jpg|jpeg|png|webp)(?:\?[^"']*)?)["']/gi)]
-.map(m=>m[1]);
-
-[...markdownImages,...directUrls,...attrs].forEach(url=>{
-if(!url) return;
-
-let clean = url
-.replace(/&amp;/g,"&")
-.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,"")
-.trim();
-
-if(clean.startsWith("//")) clean = "https:" + clean;
-
-const lower = clean.toLowerCase();
-
-if(!lower.includes("mantosdofutebol")) return;
-if(lower.includes("fornecedoras")) return;
-if(lower.includes("logo")) return;
-if(lower.includes("guia")) return;
-if(lower.includes("favicon")) return;
-
-urls.push(clean);
-});
-
-return [...new Set(urls)];
-}
-
-async function loadImages(){
-statusEl.textContent = "Buscando imagens no guia...";
-
-teams.forEach(team=>team.kits.forEach(kit=>kit.image=null));
-
-for(const source of DATA_SOURCES){
-try{
-const response = await fetch(source,{cache:"no-store"});
-const text = await response.text();
-
-if(!text || text.length < 1000) continue;
-
-teams.forEach((team,index)=>{
-const block = getBlockForTeam(text,team.name,index);
-if(!block) return;
-
-const imgs = extractImagesFromBlock(block);
-
-imgs.slice(0,3).forEach((src,i)=>{
-team.kits[i].image = src;
-});
-});
-
-const totalImages = teams.reduce((total,team)=>{
-return total + team.kits.filter(kit=>kit.image).length;
-},0);
-
-if(totalImages > 0){
-localStorage.setItem("teamsImages",JSON.stringify(teams.map(t=>t.kits.map(k=>k.image))));
-statusEl.textContent = `${totalImages} imagens carregadas. Camisas sem imagem não serão exibidas.`;
-render();
-return;
-}
-
-}catch(e){
-console.warn("Falha ao carregar fonte:",source,e);
-}
-}
-
-localStorage.removeItem("teamsImages");
-statusEl.textContent = "Não consegui carregar imagens agora. Tente novamente em alguns minutos.";
-render();
-}
-
-function escapeReg(s){
-return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-}
-
-function restoreImages(){
-const saved = localStorage.getItem("teamsImages");
-
-if(!saved) return false;
-
-try{
-const imgs = JSON.parse(saved);
-let count = 0;
-
-teams.forEach((t,i)=>t.kits.forEach((k,j)=>{
-k.image = imgs[i]?.[j] || null;
-if(k.image) count++;
-}));
-
-if(count === 0){
-localStorage.removeItem("teamsImages");
-return false;
-}
-
-statusEl.textContent = `${count} imagens carregadas do cache.`;
-return true;
-
-}catch(e){
-localStorage.removeItem("teamsImages");
-return false;
-}
 }
 
 function renderRankings(){
 ["lindo","linda"].forEach(user=>{
-const data = [];
-
-teams.forEach(team=>{
-team.kits.forEach(kit=>{
-const v = getVote(user,kit.id);
-
+const data=[];
+teams.forEach(team=>team.kits.forEach(kit=>{
+const v=getVote(user,kit.id);
 data.push({
 title:kit.title,
 total:(v.beauty||0)+(v.use||0),
@@ -693,104 +368,73 @@ use:v.use||0,
 sair:v.sair,
 treino:v.treino
 });
-});
-});
+}));
 
 rank(`ranking-geral-${user}`,[...data].sort((a,b)=>b.total-a.total),"total");
 rank(`ranking-bonita-${user}`,[...data].sort((a,b)=>b.beauty-a.beauty),"beauty");
 
 rankUso(`ranking-uso-${user}`,[...data].sort((a,b)=>{
-const scoreA = (a.sair && a.treino) ? 3 : a.sair ? 2 : a.treino ? 1 : 0;
-const scoreB = (b.sair && b.treino) ? 3 : b.sair ? 2 : b.treino ? 1 : 0;
-
-if(scoreB !== scoreA) return scoreB - scoreA;
-
-return b.total - a.total;
+const scoreA=(a.sair&&a.treino)?3:a.sair?2:a.treino?1:0;
+const scoreB=(b.sair&&b.treino)?3:b.sair?2:b.treino?1:0;
+if(scoreB!==scoreA) return scoreB-scoreA;
+return b.total-a.total;
 }));
 });
 }
 
 function rank(id,data,key){
-const el = document.getElementById(id);
-el.innerHTML = "";
-
-data
-.filter(x=>x[key]>0)
-.slice(0,10)
-.forEach((x,i)=>{
-el.innerHTML += `
+const el=document.getElementById(id);
+el.innerHTML="";
+data.filter(x=>x[key]>0).slice(0,10).forEach((x,i)=>{
+el.innerHTML+=`
 <div class="ranking-item">
 <div>
 <strong>${medal(i)} ${i+1}. ${x.title}</strong><br>
-${x.sair ? '<span class="badge">Sair</span>' : ''}
-${x.treino ? '<span class="badge">Jogar/Treinar</span>' : ''}
+${x.sair?'<span class="badge">Sair</span>':''}
+${x.treino?'<span class="badge">Jogar/Treinar</span>':''}
 </div>
 <div>★ ${x[key]}</div>
-</div>
-`;
+</div>`;
 });
-
-if(!el.innerHTML){
-el.innerHTML = '<div class="small">Ainda sem votos.</div>';
-}
+if(!el.innerHTML) el.innerHTML='<div class="small">Ainda sem votos.</div>';
 }
 
 function rankUso(id,data){
-const el = document.getElementById(id);
-el.innerHTML = "";
-
-data
-.filter(x=>x.sair || x.treino)
-.slice(0,10)
-.forEach((x,i)=>{
-el.innerHTML += `
+const el=document.getElementById(id);
+el.innerHTML="";
+data.filter(x=>x.sair||x.treino).slice(0,10).forEach((x,i)=>{
+el.innerHTML+=`
 <div class="ranking-item">
 <div>
 <strong>${medal(i)} ${i+1}. ${x.title}</strong><br>
-${x.sair ? '<span class="badge">Sair</span>' : ''}
-${x.treino ? '<span class="badge">Jogar/Treinar</span>' : ''}
+${x.sair?'<span class="badge">Sair</span>':''}
+${x.treino?'<span class="badge">Jogar/Treinar</span>':''}
 </div>
 <div>★ ${x.total}</div>
-</div>
-`;
+</div>`;
 });
-
-if(!el.innerHTML){
-el.innerHTML = '<div class="small">Ainda sem votos.</div>';
-}
+if(!el.innerHTML) el.innerHTML='<div class="small">Ainda sem votos.</div>';
 }
 
-document.getElementById("saveBtn").onclick = saveAll;
-document.getElementById("clearBtn").onclick = clearCurrentUserVotes;
-document.getElementById("imageBtn").onclick = loadImages;
-
-document.getElementById("goRankingBtn").onclick = ()=>{
+document.getElementById("saveBtn").onclick=saveAll;
+document.getElementById("clearBtn").onclick=clearCurrentUserVotes;
+document.getElementById("imageBtn").onclick=()=>{
+statusEl.textContent="Imagens estáticas já carregadas. Não há busca automática nesta versão.";
+render();
+};
+document.getElementById("goRankingBtn").onclick=()=>{
 document.getElementById("rankings").scrollIntoView({behavior:"smooth",block:"start"});
 };
+document.getElementById("currentUser").onchange=render;
 
-document.getElementById("currentUser").onchange = render;
-
-const backToTopBtn = document.getElementById("backToTopBtn");
-
-window.addEventListener("scroll",()=>{
-backToTopBtn.style.display = window.scrollY > 500 ? "flex" : "none";
-});
-
-backToTopBtn.onclick = ()=>{
-window.scrollTo({top:0,behavior:"smooth"});
-};
+const backToTopBtn=document.getElementById("backToTopBtn");
+window.addEventListener("scroll",()=>{backToTopBtn.style.display=window.scrollY>500?"flex":"none"});
+backToTopBtn.onclick=()=>{window.scrollTo({top:0,behavior:"smooth"})};
 
 setupTeamJump();
-
 await loadAllVotes();
-
-const restored = restoreImages();
-
-if(restored){
+statusEl.textContent="Pronto. Vote e depois clique em Salvar avaliações.";
 render();
-}else{
-await loadImages();
-}
 </script>
 </body>
 </html>
