@@ -7,7 +7,7 @@
 
 <style>
 :root{
---bg:#0b0b12;--card:#161621;--border:#2b2b3b;--text:#ffffff;--muted:#bbbbcc;
+--bg:#0b0b12;--card:#161621;--text:#fff;--muted:#bbbbcc;
 --blue:#4f6bff;--purple:#9b6dff;--green:#c5ff00;--gold:#f5c542;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -80,17 +80,8 @@ opacity:.28;
 transition:transform .18s ease, opacity .18s ease, filter .18s ease;
 display:inline-block;
 }
-
-.star:hover{
-transform:scale(1.18) rotate(-4deg);
-}
-
-.star.active{
-filter:none;
-opacity:1;
-animation:starPop .22s ease;
-}
-
+.star:hover{transform:scale(1.18) rotate(-4deg)}
+.star.active{filter:none;opacity:1;animation:starPop .22s ease}
 @keyframes starPop{
 0%{transform:scale(.85)}
 60%{transform:scale(1.22)}
@@ -127,47 +118,17 @@ justify-content:center;
 padding:0;
 box-shadow:0 8px 24px rgba(0,0,0,.25);
 }
-
-#backToTopBtn:hover{
-background:rgba(245,197,66,.85);
-color:#111;
-}
-
+#backToTopBtn:hover{background:rgba(245,197,66,.85);color:#111}
 
 @media(max-width:700px){
 body{padding:10px}
-.topbar{
-position:relative;
-top:auto;
-border-radius:18px;
-padding:12px;
-margin-bottom:18px;
-}
-.header-title{
-gap:8px;
-margin-bottom:6px;
-}
-.header-title img{
-width:42px;
-}
-h1{
-font-size:20px;
-line-height:1.15;
-}
-.subtitle{
-font-size:12px;
-margin-bottom:10px;
-}
-
-.controls{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-align-items:stretch;
-}
-
-.controls select,
-.controls button{
+.topbar{position:relative;top:auto;border-radius:18px;padding:12px;margin-bottom:18px}
+.header-title{gap:8px;margin-bottom:6px}
+.header-title img{width:42px}
+h1{font-size:20px;line-height:1.15}
+.subtitle{font-size:12px;margin-bottom:10px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
+.controls select,.controls button{
 width:100%;
 height:54px;
 padding:0 10px;
@@ -179,104 +140,29 @@ align-items:center;
 justify-content:center;
 border-radius:14px;
 }
-
-#currentUser,
-#teamJump{
-height:54px;
-}
-
-#clearBtn{
-grid-column:1 / -1;
-}
-
-#saveBtn{
-grid-column:1 / -1;
-height:56px;
-}
-#currentUser,#teamJump{
-grid-column:span 1;
-}
-
-.status{
-font-size:12px;
-line-height:1.3;
-margin-top:8px;
-}
-.team{
-margin:28px 0;
-scroll-margin-top:20px;
-}
-.team h2{
-font-size:22px;
-margin-bottom:12px;
-}
-.flag{
-width:30px;
-height:21px;
-}
-.kits{
-grid-template-columns:1fr;
-gap:14px;
-}
-.card{
-border-radius:18px;
-}
-.imgbox{
-height:245px;
-padding:12px;
-}
-.content{
-padding:14px;
-}
-.kit-title{
-font-size:19px;
-margin-bottom:10px;
-}
-.question{
-margin:14px 0;
-}
-.star{
-font-size:25px;
-}
-.tag{
-font-size:13px;
-padding:8px 11px;
-}
-.rankings{
-margin-top:34px;
-scroll-margin-top:20px;
-}
-.rankings h2{
-font-size:26px;
-}
-.ranking-grid{
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.ranking-box{
-min-width:0;
-}
-
-.ranking-box h3{
-font-size:15px;
-line-height:1.25;
-}
-
-.ranking-item{
-font-size:12px;
-gap:6px;
-}
-
-.badge{
-font-size:9px;
-padding:3px 6px;
-}
-
-.ranking-item strong{
-font-size:12px;
-}
-
+#currentUser,#teamJump{height:54px;grid-column:span 1}
+#clearBtn{grid-column:1 / -1}
+#saveBtn{grid-column:1 / -1;height:56px}
+.status{font-size:12px;line-height:1.3;margin-top:8px}
+.team{margin:28px 0;scroll-margin-top:20px}
+.team h2{font-size:22px;margin-bottom:12px}
+.flag{width:30px;height:21px}
+.kits{grid-template-columns:1fr;gap:14px}
+.card{border-radius:18px}
+.imgbox{height:245px;padding:12px}
+.content{padding:14px}
+.kit-title{font-size:19px;margin-bottom:10px}
+.question{margin:14px 0}
+.star{font-size:25px}
+.tag{font-size:13px;padding:8px 11px}
+.rankings{margin-top:34px;scroll-margin-top:20px}
+.rankings h2{font-size:26px}
+.ranking-grid{grid-template-columns:1fr 1fr;gap:10px}
+.ranking-box{min-width:0}
+.ranking-box h3{font-size:15px;line-height:1.25}
+.ranking-item{font-size:12px;gap:6px}
+.badge{font-size:9px;padding:3px 6px}
+.ranking-item strong{font-size:12px}
 }
 </style>
 </head>
@@ -293,9 +179,7 @@ onerror="this.style.display='none'"
 <h1>Ranking Camisas Copa 2026</h1>
 </div>
 
-<div class="subtitle">
-Lindo vs Linda • Uniformes da Copa do Mundo 2026
-</div>
+<div class="subtitle">Lindo vs Linda • Uniformes da Copa do Mundo 2026!</div>
 
 <div class="controls">
 <select id="currentUser">
@@ -317,7 +201,9 @@ Lindo vs Linda • Uniformes da Copa do Mundo 2026
 </div>
 
 <div id="teams"></div>
+
 <button id="backToTopBtn" title="Voltar ao topo">↑</button>
+
 <section class="rankings" id="rankings">
 <h2>Rankings</h2>
 
@@ -354,54 +240,18 @@ const PROXIES = [
 ];
 
 const countryCodes = {
-"México":"mx",
-"África do Sul":"za",
-"Coréia do Sul":"kr",
-"República Tcheca":"cz",
-"Canadá":"ca",
-"Bósnia-Herzegovina":"ba",
-"Catar":"qa",
-"Suíça":"ch",
-"Brasil":"br",
-"Marrocos":"ma",
-"Haiti":"ht",
-"Escócia":"gb-sct",
-"Estados Unidos":"us",
-"Paraguai":"py",
-"Austrália":"au",
-"Turquia":"tr",
-"Alemanha":"de",
-"Curaçao":"cw",
-"Costa do Marfim":"ci",
-"Equador":"ec",
-"Holanda":"nl",
-"Japão":"jp",
-"Suécia":"se",
-"Tunísia":"tn",
-"Bélgica":"be",
-"Egito":"eg",
-"Irã":"ir",
-"Nova Zelândia":"nz",
-"Espanha":"es",
-"Cabo Verde":"cv",
-"Arábia Saudita":"sa",
-"Uruguai":"uy",
-"França":"fr",
-"Senegal":"sn",
-"Iraque":"iq",
-"Noruega":"no",
-"Argentina":"ar",
-"Argélia":"dz",
-"Áustria":"at",
-"Jordânia":"jo",
-"Portugal":"pt",
-"RD Congo":"cd",
-"Uzbequistão":"uz",
-"Colômbia":"co",
-"Inglaterra":"gb-eng",
-"Croácia":"hr",
-"Gana":"gh",
-"Panamá":"pa"
+"México":"mx","África do Sul":"za","Coréia do Sul":"kr","República Tcheca":"cz",
+"Canadá":"ca","Bósnia-Herzegovina":"ba","Catar":"qa","Suíça":"ch",
+"Brasil":"br","Marrocos":"ma","Haiti":"ht","Escócia":"gb-sct",
+"Estados Unidos":"us","Paraguai":"py","Austrália":"au","Turquia":"tr",
+"Alemanha":"de","Curaçao":"cw","Costa do Marfim":"ci","Equador":"ec",
+"Holanda":"nl","Japão":"jp","Suécia":"se","Tunísia":"tn",
+"Bélgica":"be","Egito":"eg","Irã":"ir","Nova Zelândia":"nz",
+"Espanha":"es","Cabo Verde":"cv","Arábia Saudita":"sa","Uruguai":"uy",
+"França":"fr","Senegal":"sn","Iraque":"iq","Noruega":"no",
+"Argentina":"ar","Argélia":"dz","Áustria":"at","Jordânia":"jo",
+"Portugal":"pt","RD Congo":"cd","Uzbequistão":"uz","Colômbia":"co",
+"Inglaterra":"gb-eng","Croácia":"hr","Gana":"gh","Panamá":"pa"
 };
 
 const teamNames = [
@@ -421,11 +271,16 @@ const teamNames = [
 
 const teams = teamNames.map(name=>({
 name,
-kits:[1,2,3].map(n=>({id:slug(name)+n,title:`${name} ${n}`,image:null}))
+kits:[1,2,3].map(n=>({
+id:slug(name)+n,
+title:`${name} ${n}`,
+image:null
+}))
 }));
 
 let votes = {};
 let dirty = {};
+
 const statusEl = document.getElementById("status");
 
 function flagUrl(name){
@@ -443,6 +298,13 @@ return t.toLowerCase()
 
 function emptyVote(){
 return {beauty:0,use:0,sair:false,treino:false};
+}
+
+function medal(index){
+if(index === 0) return "🥇";
+if(index === 1) return "🥈";
+if(index === 2) return "🥉";
+return "";
 }
 
 async function loadAllVotes(){
@@ -470,6 +332,7 @@ statusEl.textContent = "Você tem alterações não salvas.";
 
 function setupTeamJump(){
 const teamJump = document.getElementById("teamJump");
+teamJump.innerHTML = `<option value="">Ir para seleção...</option>`;
 
 teamNames.forEach(name=>{
 const option = document.createElement("option");
@@ -493,13 +356,17 @@ const user = document.getElementById("currentUser").value;
 container.innerHTML = "";
 
 teams.forEach(team=>{
+const visibleKits = team.kits.filter(kit => kit.image);
+
+if(!visibleKits.length) return;
+
 const div = document.createElement("div");
 div.className = "team";
 div.id = "team-" + slug(team.name);
 
 div.innerHTML = `
 <h2>
-<img class="flag" src="${flagUrl(team.name)}" alt="Bandeira ${team.name}" onerror="this.style.display='none'">
+<img class="flag" src="${flagUrl(team.name)}" alt="Bandeira ${team.name}" loading="lazy" onerror="this.style.display='none'">
 <span>${team.name}</span>
 </h2>
 <div class="kits"></div>
@@ -507,21 +374,19 @@ div.innerHTML = `
 
 const kitsDiv = div.querySelector(".kits");
 
-team.kits
-.filter(kit => kit.image)
-.forEach(kit=>{
+visibleKits.forEach(kit=>{
 const v = getVote(user,kit.id);
 const card = document.createElement("div");
 card.className = "card";
 
 card.innerHTML = `
 <div class="imgbox">
-${kit.image ? `<img 
-src="${kit.image}" 
+<img
+src="${kit.image}"
 loading="lazy"
 decoding="async"
-onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'"
->` : `Camisa ainda não divulgada`}
+onerror="this.closest('.card').remove()"
+>
 </div>
 
 <div class="content">
@@ -548,9 +413,7 @@ onerror="this.parentElement.innerHTML='Camisa ainda não divulgada'"
 kitsDiv.appendChild(card);
 });
 
-if(kitsDiv.children.length > 0){
 container.appendChild(div);
-}
 });
 
 bindActions();
@@ -637,42 +500,79 @@ statusEl.textContent = `Avaliações do perfil ${label} apagadas.`;
 render();
 }
 
+function extractImagesFromBlock(block){
+const found = [];
+
+const directUrls = [...block.matchAll(/https?:\/\/assets-mantosdofutebol[^"'\s<>]+?\.(?:jpg|jpeg|png|webp)/gi)]
+.map(m=>m[0]);
+
+directUrls.forEach(url=>found.push(url));
+
+const lazyUrls = [...block.matchAll(/(?:data-src|data-lazy-src|src|href)=["']([^"']+\.(?:jpg|jpeg|png|webp))["']/gi)]
+.map(m=>m[1])
+.filter(url=>url.includes("mantosdofutebol"));
+
+lazyUrls.forEach(url=>found.push(url));
+
+return [...new Set(found)]
+.map(url=>url.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,""))
+.filter(url=>!url.includes("fornecedoras"))
+.filter(url=>!url.includes("logo"))
+.filter(url=>!url.includes("guia"));
+}
+
 async function loadImages(){
 statusEl.textContent = "Buscando imagens no guia...";
+
+teams.forEach(team=>team.kits.forEach(kit=>kit.image=null));
 
 for(const proxy of PROXIES){
 try{
 const html = await fetch(proxy).then(r=>r.text());
-if(!html || html.length<1000) continue;
+
+if(!html || html.length < 1000) continue;
 
 teams.forEach((team,idx)=>{
-const start = html.search(new RegExp(`<h3[^>]*>\\s*${escapeReg(team.name)}\\s*<\\/h3>`,"i"));
-if(start<0) return;
+const current = new RegExp(`<h3[^>]*>\\s*${escapeReg(team.name)}\\s*<\\/h3>`,"i");
+const start = html.search(current);
+
+if(start < 0) return;
 
 let end = html.length;
 
 for(let j=idx+1;j<teams.length;j++){
 const next = html.search(new RegExp(`<h3[^>]*>\\s*${escapeReg(teams[j].name)}\\s*<\\/h3>`,"i"));
-if(next>start){end=next;break}
+if(next > start){
+end = next;
+break;
+}
 }
 
 const block = html.slice(start,end);
+const imgs = extractImagesFromBlock(block);
 
-const imgs = [...block.matchAll(/https?:\/\/assets-mantosdofutebol[^"'\s<>]+?\.(?:jpg|jpeg|png|webp)/gi)]
-.map(m=>m[0].replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp))/i,""))
-.filter((v,i,a)=>a.indexOf(v)===i);
-
-imgs.slice(0,3).forEach((src,i)=>teams[idx].kits[i].image=src);
+imgs.slice(0,3).forEach((src,i)=>{
+team.kits[i].image = src;
+});
 });
 
+const totalImages = teams.reduce((total,team)=>{
+return total + team.kits.filter(kit=>kit.image).length;
+},0);
+
+if(totalImages > 0){
 localStorage.setItem("teamsImages",JSON.stringify(teams.map(t=>t.kits.map(k=>k.image))));
-statusEl.textContent = "Imagens atualizadas. Camisas sem imagem continuam pretas.";
+statusEl.textContent = `${totalImages} imagens carregadas. Camisas sem imagem não serão exibidas.`;
 render();
 return;
+}
+
 }catch(e){}
 }
 
-statusEl.textContent = "Não consegui puxar as imagens automaticamente. Vamos preencher por links diretos se necessário.";
+localStorage.removeItem("teamsImages");
+statusEl.textContent = "Não consegui carregar imagens agora. Tente novamente em alguns minutos.";
+render();
 }
 
 function escapeReg(s){
@@ -681,11 +581,30 @@ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 
 function restoreImages(){
 const saved = localStorage.getItem("teamsImages");
+
 if(!saved) return false;
 
+try{
 const imgs = JSON.parse(saved);
-teams.forEach((t,i)=>t.kits.forEach((k,j)=>k.image = imgs[i]?.[j] || null));
+let count = 0;
+
+teams.forEach((t,i)=>t.kits.forEach((k,j)=>{
+k.image = imgs[i]?.[j] || null;
+if(k.image) count++;
+}));
+
+if(count === 0){
+localStorage.removeItem("teamsImages");
+return false;
+}
+
+statusEl.textContent = `${count} imagens carregadas do cache.`;
 return true;
+
+}catch(e){
+localStorage.removeItem("teamsImages");
+return false;
+}
 }
 
 function renderRankings(){
@@ -721,18 +640,14 @@ return b.total - a.total;
 });
 }
 
-function medal(index){
-if(index === 0) return "🥇";
-if(index === 1) return "🥈";
-if(index === 2) return "🥉";
-return "";
-}
-
 function rank(id,data,key){
 const el = document.getElementById(id);
 el.innerHTML = "";
 
-data.filter(x=>x[key]>0).slice(0,10).forEach((x,i)=>{
+data
+.filter(x=>x[key]>0)
+.slice(0,10)
+.forEach((x,i)=>{
 el.innerHTML += `
 <div class="ranking-item">
 <div>
@@ -792,22 +707,25 @@ backToTopBtn.style.display = window.scrollY > 500 ? "flex" : "none";
 });
 
 backToTopBtn.onclick = ()=>{
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+window.scrollTo({top:0,behavior:"smooth"});
 };
 
 setupTeamJump();
 
 await loadAllVotes();
 
-if(!restoreImages()){
+const restored = restoreImages();
+
+if(!restored){
 await loadImages();
+}else{
+render();
 }
 
-statusEl.textContent = "Pronto. Vote e depois clique em Salvar avaliações.";
-render();
+if(document.getElementById("teams").children.length === 0){
+statusEl.textContent = "Nenhuma imagem carregada. Clique em Atualizar imagens.";
+}
+
 </script>
 </body>
 </html>
